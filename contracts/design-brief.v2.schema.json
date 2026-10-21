@@ -1,0 +1,196 @@
+{
+  "$defs": {
+    "Level": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "elevationMm": {
+          "default": 0,
+          "maximum": 10000,
+          "minimum": -10000,
+          "title": "Elevationmm",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "key",
+        "name"
+      ],
+      "title": "Level",
+      "type": "object"
+    },
+    "RoomRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "bedroom",
+            "bathroom",
+            "living",
+            "dining",
+            "living-dining",
+            "kitchen",
+            "circulation",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "minimumAreaMm2": {
+          "maximum": 400000000,
+          "minimum": 1000000,
+          "title": "Minimumareamm2",
+          "type": "integer"
+        },
+        "adjacentTo": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Adjacentto",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "kind",
+        "minimumAreaMm2"
+      ],
+      "title": "RoomRequirement",
+      "type": "object"
+    },
+    "Site": {
+      "additionalProperties": false,
+      "properties": {
+        "widthMm": {
+          "maximum": 20000,
+          "minimum": 10000,
+          "title": "Widthmm",
+          "type": "integer"
+        },
+        "depthMm": {
+          "maximum": 20000,
+          "minimum": 10000,
+          "title": "Depthmm",
+          "type": "integer"
+        },
+        "entry": {
+          "enum": [
+            "north",
+            "south",
+            "east",
+            "west"
+          ],
+          "title": "Entry",
+          "type": "string"
+        }
+      },
+      "required": [
+        "widthMm",
+        "depthMm",
+        "entry"
+      ],
+      "title": "Site",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 2,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "briefId": {
+      "format": "uuid",
+      "title": "Briefid",
+      "type": "string"
+    },
+    "version": {
+      "maximum": 20,
+      "minimum": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "parentVersion": {
+      "anyOf": [
+        {
+          "maximum": 19,
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Parentversion"
+    },
+    "site": {
+      "$ref": "#/$defs/Site"
+    },
+    "level": {
+      "$ref": "#/$defs/Level"
+    },
+    "wallHeightMm": {
+      "maximum": 4000,
+      "minimum": 2500,
+      "title": "Wallheightmm",
+      "type": "integer"
+    },
+    "requirements": {
+      "items": {
+        "$ref": "#/$defs/RoomRequirement"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Requirements",
+      "type": "array"
+    },
+    "preferences": {
+      "items": {
+        "maxLength": 240,
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Preferences",
+      "type": "array"
+    },
+    "unresolvedConstraints": {
+      "items": {
+        "maxLength": 240,
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Unresolvedconstraints",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "briefId",
+    "version",
+    "parentVersion",
+    "site",
+    "level",
+    "wallHeightMm",
+    "requirements"
+  ],
+  "title": "DesignBriefV2",
+  "type": "object"
+}

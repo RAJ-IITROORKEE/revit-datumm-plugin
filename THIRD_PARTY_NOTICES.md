@@ -1,0 +1,10 @@
+# Third-party notices and provenance
+
+No upstream Revit automation implementation code is imported. Native source is exported from the owner's existing DATUMM project; original revision and per-file hashes are recorded in [source-export.json](docs/provenance/source-export.json).
+
+- Build-only API references: `Nice3point.Revit.Api.RevitAPI` and `Nice3point.Revit.Api.RevitAPIUI` **2026.0.4**, published by Nice3point on [NuGet](https://www.nuget.org/packages/Nice3point.Revit.Api.RevitAPI/2026.0.4). These are third-party packages, not official Autodesk NuGet publications. Package metadata and SHA512 content integrity are locked in `revit-plugin/src/Datumm.Revit/packages.lock.json`. Publisher packaging license is MIT, copyright 2024 Nice3point; this does not supersede Autodesk's rights in its assemblies. Reference identity and hashes are in [api-references.json](docs/provenance/api-references.json). No Autodesk DLL, template or family content is committed or shipped; Revit provides runtime assemblies.
+- Node.js **24.21.0**, Windows x64, is downloaded from nodejs.org. SHA256 is pinned in `scripts/setup-node.ps1`. The installer includes its full LICENSE and bundled notices.
+- MCP SDK **1.32.1**, Ajv **8.20.0**, Zod **4.6.5**, ws **8.21.3** and production transitive npm dependencies retain their package metadata and shipped license files in the payload. `package-lock.json` pins resolutions and integrity. TypeScript **5.9.3** and Node type declarations are build dependencies only. No dependency implementation source is modified.
+- Inno Setup 6: [publisher](https://jrsoftware.org/), local compiler SHA256 pinned in `scripts/package.ps1`. Its binary attribution and unmodified license are included in the installer payload; no compiler source is imported.
+
+No project-wide distribution license or publisher signing identity has been selected. The installer is an unsigned development candidate. Dependency licenses remain with their respective publishers.

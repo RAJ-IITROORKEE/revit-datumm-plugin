@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datumm.dev/contracts/brief-extraction.v2.schema.json",
+  "$defs": {
+    "Fact": {
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "enum": [
+            "bedrooms",
+            "guestRooms",
+            "bathrooms",
+            "entry",
+            "dimensionRole",
+            "jurisdiction",
+            "output",
+            "label",
+            "room"
+          ],
+          "title": "Field",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "maximum": 20,
+              "minimum": 0,
+              "type": "integer"
+            }
+          ],
+          "title": "Value"
+        },
+        "sourceId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Sourceid",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 1,
+          "title": "End",
+          "type": "integer"
+        },
+        "quote": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "field",
+        "value",
+        "sourceId",
+        "start",
+        "end",
+        "quote"
+      ],
+      "title": "Fact",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 2,
+      "default": 2,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "inputDigest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Inputdigest",
+      "type": "string"
+    },
+    "facts": {
+      "items": {
+        "$ref": "#/$defs/Fact"
+      },
+      "maxItems": 40,
+      "title": "Facts",
+      "type": "array"
+    }
+  },
+  "required": [
+    "inputDigest"
+  ],
+  "title": "Interpretation",
+  "type": "object"
+}

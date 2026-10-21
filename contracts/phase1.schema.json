@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://datumm.local/contracts/phase1",
+  "definitions": {
+    "uuid": { "type": "string", "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$" },
+    "descriptor": {
+      "type": "object", "additionalProperties": false,
+      "required": ["protocolVersion", "sessionId", "processId", "baseUrl", "token", "pluginVersion", "revitVersion", "startedAt"],
+      "properties": {
+        "protocolVersion": { "const": "1" },
+        "sessionId": { "$ref": "#/definitions/uuid" },
+        "processId": { "type": "integer", "minimum": 1 },
+        "baseUrl": { "type": "string", "pattern": "^http://127\\.0\\.0\\.1:[0-9]{1,5}/$" },
+        "token": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "pluginVersion": { "type": "string", "maxLength": 64 },
+        "revitVersion": { "type": "string", "maxLength": 64 },
+        "startedAt": { "type": "string", "maxLength": 64 }
+      }
+    },
+    "health": {
+      "type": "object", "additionalProperties": false,
+      "required": ["service", "pluginVersion", "revitVersion", "processId", "capabilities", "readOnly"],
+      "properties": {
+        "service": { "const": "datumm-revit" }, "pluginVersion": { "type": "string" },
+        "revitVersion": { "type": "string" }, "processId": { "type": "integer", "minimum": 1 },
+        "capabilities": { "type": "array", "items": { "enum": ["get_document_context", "get_model_elements", "get_model_catalog", "get_model_inventory", "get_model_views", "get_model_quantities", "get_plan_snapshot", "get_plan_image", "get_selection", "preview_changes", "approve_change_set", "apply_change_set", "get_operation_status", "get_native_capabilities", "get_dimension_references", "show_model_elements"] }, "maxItems": 16, "uniqueItems": true },
+        "readOnly": { "type": "boolean" }
+      }
+    },
+    "documentContext": {
+      "type": "object", "additionalProperties": false,
+      "required": ["documentId", "title", "isFamilyDocument", "isReadOnly", "isWorkshared", "activeViewId", "activeViewName", "selectionCount", "lengthDisplayUnit", "supportedForFutureWrites"],
+      "properties": {
+        "documentId": { "$ref": "#/definitions/uuid" }, "title": { "type": "string" },
+        "isFamilyDocument": { "type": "boolean" }, "isReadOnly": { "type": "boolean" },
+        "isWorkshared": { "type": "boolean" }, "activeViewId": { "type": ["string", "null"] },
+        "activeViewName": { "type": ["string", "null"] }, "selectionCount": { "type": "integer", "minimum": 0 },
+        "lengthDisplayUnit": { "type": "string" }, "supportedForFutureWrites": { "type": "boolean" }
+      }
+    },
+    "envelope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["protocolVersion", "sessionId", "operationId", "ok", "data", "error"],
+      "properties": {
+        "protocolVersion": { "const": "1" }, "sessionId": { "$ref": "#/definitions/uuid" },
+        "operationId": { "$ref": "#/definitions/uuid" }, "ok": { "type": "boolean" },
+        "data": {}, "error": {}
+      },
+      "allOf": [{ "if": { "properties": { "ok": { "const": true } } },
+        "then": { "properties": { "error": { "type": "null" }, "data": { "type": "object" } } },
+        "else": { "properties": { "data": { "type": "null" }, "error": {
+          "type": "object", "additionalProperties": false, "required": ["code", "message"],
+          "properties": { "code": { "type": "string" }, "message": { "type": "string" } }
+        } } }
+      }]
+    }
+  }
+}

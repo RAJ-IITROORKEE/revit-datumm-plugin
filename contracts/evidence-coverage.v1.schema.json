@@ -1,0 +1,123 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "documentId": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Documentid",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 0,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "sourceTool": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Sourcetool",
+      "type": "string"
+    },
+    "category": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Category",
+      "type": "string"
+    },
+    "levelId": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Levelid"
+    },
+    "linkId": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Linkid"
+    },
+    "status": {
+      "enum": [
+        "complete",
+        "partial",
+        "unavailable"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "returnedCount": {
+      "minimum": 0,
+      "title": "Returnedcount",
+      "type": "integer"
+    },
+    "totalCount": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Totalcount"
+    },
+    "nextCursor": {
+      "anyOf": [
+        {
+          "maxLength": 512,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Nextcursor"
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 240,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reason"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "documentId",
+    "revision",
+    "sourceTool",
+    "category",
+    "status",
+    "returnedCount"
+  ],
+  "title": "EvidenceCoverageV1",
+  "type": "object"
+}

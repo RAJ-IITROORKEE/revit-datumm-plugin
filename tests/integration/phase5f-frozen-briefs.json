@@ -1,0 +1,17 @@
+{
+  "purpose": "Frozen Phase 5F evaluation briefs; do not tune the solver by changing these cases.",
+  "feasible": [
+    {"id": "east-12x11-2b1b", "siteMm": [12000, 11000], "entry": "east", "bedrooms": 2, "bathrooms": 1, "revisions": ["Move kitchen next to dining", "Increase living area while retaining two bedrooms"]},
+    {"id": "west-16x12-3b2b", "siteMm": [16000, 12000], "entry": "west", "bedrooms": 3, "bathrooms": 2, "revisions": ["Place both bathrooms near bedrooms", "Widen entrance circulation"]},
+    {"id": "north-10x14-2b2b", "siteMm": [10000, 14000], "entry": "north", "bedrooms": 2, "bathrooms": 2, "revisions": ["Separate bedrooms from living", "Make kitchen adjacent to dining"]},
+    {"id": "south-18x15-3b1b", "siteMm": [18000, 15000], "entry": "south", "bedrooms": 3, "bathrooms": 1, "revisions": ["Reduce circulation area", "Move the bathroom away from entry"]}
+  ],
+  "infeasible": [
+    {"id": "area-over-site", "siteMm": [10000, 10000], "entry": "north", "bedrooms": 3, "bathrooms": 2, "minimumProgramAreaM2": 140, "expected": "Reject requested minimum area greater than site area"},
+    {"id": "impossible-adjacency", "siteMm": [10000, 12000], "entry": "south", "bedrooms": 2, "bathrooms": 1, "constraints": ["Every room must occupy the entire south exterior wall"], "expected": "Reject mutually exclusive edge occupancy"}
+  ],
+  "unsupported": [
+    {"id": "irregular-site", "sitePolygonMm": [[0, 0], [12000, 0], [12000, 8000], [8000, 12000], [0, 12000]], "expected": "Reject nonrectangular site"},
+    {"id": "multistorey", "siteMm": [14000, 12000], "levels": 2, "expected": "Reject multistorey request"}
+  ]
+}

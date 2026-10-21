@@ -1,0 +1,421 @@
+{
+  "$defs": {
+    "Level": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "elevationMm": {
+          "default": 0,
+          "maximum": 10000,
+          "minimum": -10000,
+          "title": "Elevationmm",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "key",
+        "name"
+      ],
+      "title": "Level",
+      "type": "object"
+    },
+    "Opening": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "wallKey": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Wallkey",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "door",
+            "window"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "offsetMm": {
+          "maximum": 20000,
+          "minimum": 0,
+          "title": "Offsetmm",
+          "type": "integer"
+        },
+        "widthMm": {
+          "maximum": 20000,
+          "minimum": 1,
+          "title": "Widthmm",
+          "type": "integer"
+        },
+        "heightMm": {
+          "maximum": 20000,
+          "minimum": 1,
+          "title": "Heightmm",
+          "type": "integer"
+        },
+        "sillMm": {
+          "maximum": 20000,
+          "minimum": 0,
+          "title": "Sillmm",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "key",
+        "wallKey",
+        "kind",
+        "offsetMm",
+        "widthMm",
+        "heightMm",
+        "sillMm"
+      ],
+      "title": "Opening",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "enum": [
+            "deterministic",
+            "model-suggested",
+            "user-revised"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "briefId": {
+          "format": "uuid",
+          "title": "Briefid",
+          "type": "string"
+        },
+        "briefVersion": {
+          "maximum": 20,
+          "minimum": 1,
+          "title": "Briefversion",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "source",
+        "briefId",
+        "briefVersion"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "Room": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "bedroom",
+            "bathroom",
+            "living",
+            "dining",
+            "living-dining",
+            "kitchen",
+            "circulation",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "rect": {
+          "items": {
+            "maximum": 20000,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Rect",
+          "type": "array"
+        },
+        "areaMm2": {
+          "exclusiveMinimum": 0,
+          "maximum": 400000000,
+          "title": "Areamm2",
+          "type": "integer"
+        },
+        "adjacentTo": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Adjacentto",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "name",
+        "kind",
+        "rect",
+        "areaMm2"
+      ],
+      "title": "Room",
+      "type": "object"
+    },
+    "Site": {
+      "additionalProperties": false,
+      "properties": {
+        "widthMm": {
+          "maximum": 20000,
+          "minimum": 10000,
+          "title": "Widthmm",
+          "type": "integer"
+        },
+        "depthMm": {
+          "maximum": 20000,
+          "minimum": 10000,
+          "title": "Depthmm",
+          "type": "integer"
+        },
+        "entry": {
+          "enum": [
+            "north",
+            "south",
+            "east",
+            "west"
+          ],
+          "title": "Entry",
+          "type": "string"
+        }
+      },
+      "required": [
+        "widthMm",
+        "depthMm",
+        "entry"
+      ],
+      "title": "Site",
+      "type": "object"
+    },
+    "Wall": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "start": {
+          "items": {
+            "maximum": 20000,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "Start",
+          "type": "array"
+        },
+        "end": {
+          "items": {
+            "maximum": 20000,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "End",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "exterior",
+            "interior"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "roomKeys": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Roomkeys",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "start",
+        "end",
+        "kind",
+        "roomKeys"
+      ],
+      "title": "Wall",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bounded general-program search; v1 stored contracts stay unchanged.",
+  "properties": {
+    "schemaVersion": {
+      "const": 2,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "engineVersion": {
+      "const": "variable-v2",
+      "title": "Engineversion",
+      "type": "string"
+    },
+    "planId": {
+      "format": "uuid",
+      "title": "Planid",
+      "type": "string"
+    },
+    "version": {
+      "maximum": 20,
+      "minimum": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "parentVersion": {
+      "anyOf": [
+        {
+          "maximum": 19,
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Parentversion"
+    },
+    "units": {
+      "const": "mm",
+      "title": "Units",
+      "type": "string"
+    },
+    "frame": {
+      "const": "internal-xy",
+      "title": "Frame",
+      "type": "string"
+    },
+    "site": {
+      "$ref": "#/$defs/Site"
+    },
+    "level": {
+      "$ref": "#/$defs/Level"
+    },
+    "wallHeightMm": {
+      "maximum": 4000,
+      "minimum": 2500,
+      "title": "Wallheightmm",
+      "type": "integer"
+    },
+    "wallThicknessMm": {
+      "maximum": 300,
+      "minimum": 100,
+      "title": "Wallthicknessmm",
+      "type": "integer"
+    },
+    "rooms": {
+      "items": {
+        "$ref": "#/$defs/Room"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Rooms",
+      "type": "array"
+    },
+    "walls": {
+      "items": {
+        "$ref": "#/$defs/Wall"
+      },
+      "maxItems": 100,
+      "title": "Walls",
+      "type": "array"
+    },
+    "openings": {
+      "items": {
+        "$ref": "#/$defs/Opening"
+      },
+      "maxItems": 100,
+      "title": "Openings",
+      "type": "array"
+    },
+    "assumptions": {
+      "items": {
+        "maxLength": 240,
+        "type": "string"
+      },
+      "maxItems": 30,
+      "title": "Assumptions",
+      "type": "array"
+    },
+    "unresolvedConstraints": {
+      "items": {
+        "maxLength": 240,
+        "type": "string"
+      },
+      "maxItems": 30,
+      "title": "Unresolvedconstraints",
+      "type": "array"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "display": {
+      "additionalProperties": {
+        "maxLength": 240,
+        "type": "string"
+      },
+      "maxProperties": 12,
+      "title": "Display",
+      "type": "object"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "engineVersion",
+    "planId",
+    "version",
+    "parentVersion",
+    "units",
+    "frame",
+    "site",
+    "level",
+    "wallHeightMm",
+    "wallThicknessMm",
+    "rooms",
+    "walls",
+    "openings",
+    "provenance"
+  ],
+  "title": "PlanGraphV2",
+  "type": "object"
+}

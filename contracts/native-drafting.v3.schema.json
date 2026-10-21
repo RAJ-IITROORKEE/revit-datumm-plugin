@@ -1,0 +1,806 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "documentId": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+    },
+    "expectedRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "levelId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "units": {
+      "type": "string",
+      "const": "mm"
+    },
+    "coordinateFrame": {
+      "type": "string",
+      "const": "revit-internal-xy"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "operations": {
+      "minItems": 1,
+      "maxItems": 100,
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "wall"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "typeId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "start": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "additionalProperties": false
+              },
+              "end": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "additionalProperties": false
+              },
+              "heightMm": {
+                "type": "number",
+                "exclusiveMinimum": 100,
+                "maximum": 20000
+              }
+            },
+            "required": [
+              "kind",
+              "key",
+              "typeId",
+              "start",
+              "end",
+              "heightMm"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "floor"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "typeId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "boundary": {
+                "minItems": 3,
+                "maxItems": 64,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "x": {
+                      "type": "number",
+                      "minimum": -1000000,
+                      "maximum": 1000000
+                    },
+                    "y": {
+                      "type": "number",
+                      "minimum": -1000000,
+                      "maximum": 1000000
+                    }
+                  },
+                  "required": [
+                    "x",
+                    "y"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "kind",
+              "key",
+              "typeId",
+              "boundary"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "door"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "typeId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "host": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "point": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "additionalProperties": false
+              },
+              "sillMm": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 10000
+              }
+            },
+            "required": [
+              "kind",
+              "key",
+              "typeId",
+              "host",
+              "point",
+              "sillMm"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "window"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "typeId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "host": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "point": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "additionalProperties": false
+              },
+              "sillMm": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 10000
+              }
+            },
+            "required": [
+              "kind",
+              "key",
+              "typeId",
+              "host",
+              "point",
+              "sillMm"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "room"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "point": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "additionalProperties": false
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              }
+            },
+            "required": [
+              "kind",
+              "key",
+              "point",
+              "name"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "room_tag"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "elementId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "viewId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "typeId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "point": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "kind",
+              "key",
+              "elementId",
+              "viewId",
+              "typeId",
+              "point"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "family_instance"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "typeId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "point": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "additionalProperties": false
+              },
+              "rotationDegrees": {
+                "type": "number",
+                "minimum": 0,
+                "exclusiveMaximum": 360
+              }
+            },
+            "required": [
+              "kind",
+              "key",
+              "typeId",
+              "point",
+              "rotationDegrees"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "dimension"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "typeId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "viewId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "start": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "additionalProperties": false
+              },
+              "end": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "additionalProperties": false
+              },
+              "stableReferences": {
+                "minItems": 2,
+                "maxItems": 8,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                }
+              }
+            },
+            "required": [
+              "kind",
+              "key",
+              "typeId",
+              "viewId",
+              "start",
+              "end",
+              "stableReferences"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "move"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "elementId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "point": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": -1000000,
+                    "maximum": 1000000
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "kind",
+              "key",
+              "elementId",
+              "point"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "set_comments"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "elementId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "value": {
+                "type": "string",
+                "maxLength": 500
+              }
+            },
+            "required": [
+              "kind",
+              "key",
+              "elementId",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "const": "set_room_metadata"
+                  },
+                  "key": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 64
+                  },
+                  "elementId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+                  },
+                  "number": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "key",
+                  "elementId",
+                  "name"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "const": "set_room_metadata"
+                  },
+                  "key": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 64
+                  },
+                  "elementId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "number": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "key",
+                  "elementId",
+                  "number"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "change_type"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "elementId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "typeId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              }
+            },
+            "required": [
+              "kind",
+              "key",
+              "elementId",
+              "typeId"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "delete"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "elementId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              }
+            },
+            "required": [
+              "kind",
+              "key",
+              "elementId"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "set_room_color_scheme"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "viewId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "schemeId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              }
+            },
+            "required": [
+              "kind",
+              "key",
+              "viewId",
+              "schemeId"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "documentId",
+    "expectedRevision",
+    "levelId",
+    "units",
+    "coordinateFrame",
+    "title",
+    "operations"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "operations": {
+            "contains": {
+              "properties": {
+                "kind": { "const": "set_room_color_scheme" }
+              },
+              "required": ["kind"]
+            }
+          }
+        },
+        "required": ["operations"]
+      },
+      "then": {
+        "properties": {
+          "operations": {
+            "items": {
+              "properties": {
+                "kind": { "const": "set_room_color_scheme" }
+              },
+              "required": ["kind"]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$id": "https://datumm.local/contracts/native-drafting/v3"
+}

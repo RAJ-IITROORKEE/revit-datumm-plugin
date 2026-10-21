@@ -1,0 +1,19 @@
+DATUMM Agent Development
+
+1. Close Revit before installing, upgrading or uninstalling DATUMM.
+2. Start Revit 2026 and load DATUMM Agent Development if prompted.
+3. Open a disposable, writable, non-workshared project for the first run.
+4. Open Add-Ins > DATUMM > Connection / Settings > Connect to DATUMM.
+   Sign in on the hosted dashboard and authorize this computer. Close the
+   Revit panel before drafting. The Azure URL is already configured.
+5. For other local MCP clients, the installer generated these snippets:
+   %LOCALAPPDATA%\Programs\DatummAgent\mcp-config.toml (Codex)
+   %LOCALAPPDATA%\Programs\DatummAgent\mcp-config.json (MCP clients using mcpServers)
+   Merge the DATUMM section into your client's configuration, replacing an old DATUMM entry if necessary. Preserve other settings. Restart/reload the MCP connection.
+6. Ask your agent to list sessions, read the document, inspect the catalog, then preview a change set. Review the exact proposal and approve it in DATUMM chat. No save/sync is performed by these tools.
+
+Recovery: after a timed-out write, query the same operation ID. Never create a new ID to blindly repeat an uncertain write. Undo does not authorize replay of an old operation.
+
+Uninstall through Windows Installed Apps. The managed development manifest, if migrated, is restored. Session/operation history under %LOCALAPPDATA%\DatummAgent is preserved. Generated snippets that you edited are preserved.
+
+Compatibility: Revit 2026 updates with API file versions from 26.0.4.409 up to but not including 27.0.0.0, including Revit 2026.5; Windows x64. The installed Revit supplies the add-in's .NET runtime. Node 24.21.0 is bundled for MCP. No cloud service/account is required for local tools.

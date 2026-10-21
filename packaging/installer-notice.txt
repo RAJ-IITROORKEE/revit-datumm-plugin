@@ -1,0 +1,12 @@
+DATUMM Agent — unsigned development installer
+
+Supported host: Autodesk Revit 2026 updates, including 2026.5, with API file versions from 26.0.4.409 up to but not including 27.0.0.0; Windows x64.
+Close Revit before installing, upgrading or removing this package.
+
+This installs the Revit add-in, local MCP server and pinned Node runtime for the current Windows user. Administrator rights and developer SDKs are not required on the destination machine. Revit must already be installed and licensed.
+
+If the managed DATUMM development add-in is present, its manifest is backed up and disabled to prevent duplicate loading. Uninstall restores that manifest. Other add-ins are preserved.
+
+The installer generates MCP configuration snippets. It does not replace an existing agent client's settings. Follow QUICKSTART.txt after installation.
+
+This alpha package is unsigned and is not a production-certified release. Drafting requires exact proposal approval through authenticated DATUMM chat, a document-scoped Full Control grant, or the Revit ribbon. Revit rechecks the exact proposal before execution.

@@ -1,0 +1,451 @@
+{
+  "includesExistingUncommittedSource": true,
+  "sourceHead": "8dd2b4d7ea29b9f2289dc9a53b7b8f263e2fc61f",
+  "sourceProject": "Datumm-codex",
+  "files": [
+    {
+      "path": ".editorconfig",
+      "sha256": "8d7a02c5bc17facf13260df246e685001fb49e3d7c308612af972889283559d0"
+    },
+    {
+      "path": ".gitattributes",
+      "sha256": "a9bcc9b936d432d034ffc086d38a86038a5b381bd990e853234397bc29ce2443"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "303adf2f915c67cf48ab0c59060ac61e5217b154e77f876d9619c4f9f0a8a036"
+    },
+    {
+      "path": ".node-version",
+      "sha256": "73fb1b615e2043a933be1c0895cde4358036acc28d785692509b822aa53c761f"
+    },
+    {
+      "path": "apps/connector/package.json",
+      "sha256": "07cbbe860f76f76825b18502c88e79ea2c53a7616515d11823020071bf1aaba2"
+    },
+    {
+      "path": "apps/connector/README.md",
+      "sha256": "06a9ccb017c118ce600c84d7c79e2f51dcb6d9d05ad994b3b32381d6542a05d6"
+    },
+    {
+      "path": "apps/connector/src/connection-lifecycle.mjs",
+      "sha256": "f8f5c89d86b4123dbd30f11f575cf2c098cda031bcb3c9a91a002d87cf535d64"
+    },
+    {
+      "path": "apps/connector/src/index.mjs",
+      "sha256": "e2d80b84e0a2119a4c90953d0e1f5477bdb57eda90cb1a2e09e2880e14e0b8d4"
+    },
+    {
+      "path": "apps/connector/src/tool-result.mjs",
+      "sha256": "34b20bc4a5655f9100ebdddcf8fedf9108a1e11c182dcc9ac906ead19dfb4bda"
+    },
+    {
+      "path": "apps/connector/tests/connection-lifecycle.test.mjs",
+      "sha256": "d0ea76828ae682e248815e1d6abb3a79b331df1b2583ff90e4ce81208f5d007a"
+    },
+    {
+      "path": "apps/connector/tests/tool-result.test.mjs",
+      "sha256": "fb6ef1b3ac0aa4dafe3e900984680786a53ff2c9441d1ef98b6f6521efaa79ce"
+    },
+    {
+      "path": "contracts/brief-extraction.v2.schema.json",
+      "sha256": "31014dbe0a5498605b1130eff021a3021a6e426c09b0b285e73a8ae35011969c"
+    },
+    {
+      "path": "contracts/design-brief.v1.schema.json",
+      "sha256": "9778bc12f9a682d0f5a8e28ff5619484fe6129ffd773d5c29b6ebb9203391fc6"
+    },
+    {
+      "path": "contracts/design-brief.v2.schema.json",
+      "sha256": "c3fcd3eaec93456d7fdd74f51d0a2a947920bca77a5ddb087e71608a3dcd3698"
+    },
+    {
+      "path": "contracts/design-brief.v3.schema.json",
+      "sha256": "5da8a518eba97899180af6af5417613946dc231ae180ab4397302846870aeb2c"
+    },
+    {
+      "path": "contracts/evidence-coverage.v1.schema.json",
+      "sha256": "74088f771c9d4164105d4cfb6bfaaad905fe21016799e62fa090a9be6796c503"
+    },
+    {
+      "path": "contracts/interpreted-brief.v2.schema.json",
+      "sha256": "9b8da70e53af1ef2a9c07e460617ad5fac454927d19674c0cf3948af7bc8da04"
+    },
+    {
+      "path": "contracts/native-drafting.v2.schema.json",
+      "sha256": "2cef6b3f2067179e6be42ead7d1f3968df1cb3a79588da7f52ba73ad110e2feb"
+    },
+    {
+      "path": "contracts/native-drafting.v3.schema.json",
+      "sha256": "e8f1afcfee68c79ce2f1239cc212fb9504d0f2d1dc359e538df1d1fa75a75532"
+    },
+    {
+      "path": "contracts/phase1.schema.json",
+      "sha256": "9db95a33b7700cc992ee0b1a19ec97ba7d3b16e9041a452e774b9a9339acac02"
+    },
+    {
+      "path": "contracts/plan-graph.v1.schema.json",
+      "sha256": "ec16a6ea4ec26253abe9f0d4a64f62fa8e48eb33ca424b28e86d23539e520cc0"
+    },
+    {
+      "path": "contracts/plan-graph.v2.schema.json",
+      "sha256": "263490b69a731ae4bc9c26f07b886fcf1c3ca9bd4f19cf2fea72f7ec78b2d276"
+    },
+    {
+      "path": "contracts/plan-graph.v3.schema.json",
+      "sha256": "3487132fbf7da72d5d6737b2e1ae3818c031f3b75064ac6214f513c4ea6911ec"
+    },
+    {
+      "path": "contracts/plan-graph.v4.schema.json",
+      "sha256": "64cb337d4c837e3d9dfe6840b0fdb3e770cd5b2dff0bfc909f1e6b14c6e7f4c6"
+    },
+    {
+      "path": "contracts/README.md",
+      "sha256": "b4da3c36f6d53683bb83bf5d8c59a2382e815fd0687ffe5f8d6c42b81e8e9656"
+    },
+    {
+      "path": "contracts/task-event.v2.schema.json",
+      "sha256": "c851540fa37793e9be07a27ebf2912f2efc43cc877955a6fdb47365f149f3144"
+    },
+    {
+      "path": "contracts/task-goal.v1.schema.json",
+      "sha256": "becb7c20e0865eac0428a742ea15900d363c59922782528d8da0d7bbf74b19cf"
+    },
+    {
+      "path": "contracts/task-protocol.v2.schema.json",
+      "sha256": "6aa96881ff6acfea03157dadbf6c6b39d30503b886081b909d9a6b272c71d8d8"
+    },
+    {
+      "path": "datumm-app/fav.png",
+      "sha256": "4f2686a68ddecf77d2ae74dd5c3b070b0d2e6f064f9ee0285210348853a6cb1b"
+    },
+    {
+      "path": "fixtures/3bhk/brief.json",
+      "sha256": "54b8023d9934bef50c92df0f506ac5389434756882eb84da3f9f145650fa7d22"
+    },
+    {
+      "path": "fixtures/3bhk/layout.json",
+      "sha256": "ec7e61ac86c7a20f4b12ae5649768326f125d4e8a90c0c2e13abe80a0c32b31c"
+    },
+    {
+      "path": "fixtures/3bhk/proposal.svg",
+      "sha256": "728a00d94c775079ca14284862d88ae9c7718923e8531ae7175f966e5c3d358f"
+    },
+    {
+      "path": "global.json",
+      "sha256": "22efce6994e520c94ceeb83ea56cdc2f1503aa35bfc07324c1d08c392e6065ab"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "12e07115e0126d1aeb64c868a90f6da5366d3964f9931f7c1518e36d3155b076"
+    },
+    {
+      "path": "package.json",
+      "sha256": "a5db6ffebce17dc21bc815b87bad3776fb52592cb285ae5d493a15a48df795dc"
+    },
+    {
+      "path": "packaging/datumm.iss",
+      "sha256": "9be9ab1485fdbdcb6a98ca9afd05d3792bc3bc0a20a453db7d651beef2e62d00"
+    },
+    {
+      "path": "packaging/distribution.json",
+      "sha256": "2faed09512268fafc37c1c8efcaeeaed1b905d0e7ddab9f2a6e52e3276dc3d2d"
+    },
+    {
+      "path": "packaging/installer-notice.txt",
+      "sha256": "7edc5af41ef99ed4ea177988d94b767c1faa2e7cc0d235419d5d1f91bf437af2"
+    },
+    {
+      "path": "packaging/lifecycle.mjs",
+      "sha256": "d0b7ce707eeb89441055ef31120a15a24f017e013888a33602422d9570dad555"
+    },
+    {
+      "path": "packaging/QUICKSTART.txt",
+      "sha256": "a1b42268c5e59da23c12946ece14f21dd0b566a2bf5fc8c330e2859ceb73a081"
+    },
+    {
+      "path": "packaging/release.json",
+      "sha256": "5a36a375216b12b2665758921d2b971ad37fb3817f0c339ed02d75a3693d1388"
+    },
+    {
+      "path": "packaging/setup.mjs",
+      "sha256": "fb1747c1dc76ff250f4d53eeac7a692a3494f1c8e92372bb8876d69f2e01a1a9"
+    },
+    {
+      "path": "packaging/tests/lifecycle.test.mjs",
+      "sha256": "6ec68c78adf24fd7d61d8e2a001bd65494dd42e112150eb1e28ab2a6d7371093"
+    },
+    {
+      "path": "packaging/tests/payload-smoke.mjs",
+      "sha256": "f44955f302594a36fcaad9bc663912ded7cd5a0dbede3656ec84394cffd07c3c"
+    },
+    {
+      "path": "revit-mcp/package.json",
+      "sha256": "26ccd3cef0775f871c566d6ef9de1261c3c84426d680839679279eb27640e1f9"
+    },
+    {
+      "path": "revit-mcp/README.md",
+      "sha256": "00e1afc08ce35be4143918863310d46ea57169dd302df530fab22ed9cf6bdb71"
+    },
+    {
+      "path": "revit-mcp/src/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "revit-mcp/src/bridge.ts",
+      "sha256": "0edd7b2a16e4cd3c437ce049491cecbaefafed47d803ecb7c4b51a48cd9f1bb4"
+    },
+    {
+      "path": "revit-mcp/src/drafting.ts",
+      "sha256": "7574a36f6586d1de5f9b5af6eee4299f69c8280445b04e7e51c9c6bf1486a5d6"
+    },
+    {
+      "path": "revit-mcp/src/geometry-v3.ts",
+      "sha256": "fa5c99c31632f9b6d9b2a0e987441efcbd90cf757b13a8d055354e9e8d307d2c"
+    },
+    {
+      "path": "revit-mcp/src/index.ts",
+      "sha256": "20ac8ef2b36c654288e367d72aca8b7a025cd9a5c74f077335d44cf6b3b06814"
+    },
+    {
+      "path": "revit-mcp/src/invoke.ts",
+      "sha256": "70c791122cf84dcba95ef4de86686a55f428e9041c9f6dccb20d3b02796d5fe5"
+    },
+    {
+      "path": "revit-mcp/src/layout.ts",
+      "sha256": "01fa5c24546024c2280c2770cbf8f4cf161a1b10181446579c134a07ff65cc44"
+    },
+    {
+      "path": "revit-mcp/src/plan-drawing.ts",
+      "sha256": "9db4276534d37fc9dc0bb584388f2c8f7052f18b45020b1424f17c0314e0ef4d"
+    },
+    {
+      "path": "revit-mcp/src/plan-graph.ts",
+      "sha256": "27d6cf8ad32369fe62071b83f4821073cf9840a3446b320787694318eb7e660f"
+    },
+    {
+      "path": "revit-mcp/src/program-revision.ts",
+      "sha256": "68da5b54b443705faace3a5667d6600de95856d74aadb726820481a75dcfdcbf"
+    },
+    {
+      "path": "revit-mcp/src/program-search.ts",
+      "sha256": "6e40012aaa3ccb918dc461c4351e4c073bb62749336b2df3e1352e75792e35f5"
+    },
+    {
+      "path": "revit-mcp/src/smoke.ts",
+      "sha256": "b614534ff59dc699dd2ead99e648b9df03ef1d3311d8e37defa35890e087b79d"
+    },
+    {
+      "path": "revit-mcp/src/variable-bindings.ts",
+      "sha256": "54dd600c1d8f345d398a93bb461340781fff6a924fda42e3b1f5692660192018"
+    },
+    {
+      "path": "revit-mcp/src/variable-candidates.ts",
+      "sha256": "4b35adb451d35374d8d1aa0bb2e5964d61ae1648ba312bf887deec38f07bdd78"
+    },
+    {
+      "path": "revit-mcp/src/variable-cli.ts",
+      "sha256": "b471af3300f89e46e42d904d232c032e7fc1f2c96075907ac5c66aee2997099c"
+    },
+    {
+      "path": "revit-mcp/tests/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "revit-mcp/tests/analysis-views.test.mjs",
+      "sha256": "4867fa959776a24be169eb2cc16f0664e6a3ab6d8dcfbf6c3739e31de39f990e"
+    },
+    {
+      "path": "revit-mcp/tests/bridge.test.mjs",
+      "sha256": "fe59330139c12da735ac1c7db4ddb82f7b80e6f545720d2604a67f01abcb52c3"
+    },
+    {
+      "path": "revit-mcp/tests/element-query.test.mjs",
+      "sha256": "94c8f40b96d8b0cc5cc2d8ec25d4862c158be79f8bf7d3c67e4793f44fa659ec"
+    },
+    {
+      "path": "revit-mcp/tests/geometry-v3.test.mjs",
+      "sha256": "4e3fb80dcd389eaeca40896fcca37bebf6f1581aac569c00116305ccbaf9f74a"
+    },
+    {
+      "path": "revit-mcp/tests/layout.test.mjs",
+      "sha256": "b618614e7491e21d52adba413c795e3164fd0eff877ec3ea06a8bd23e7ecbf2b"
+    },
+    {
+      "path": "revit-mcp/tests/native-extensions.test.mjs",
+      "sha256": "f0155def5212fceaf013773d6e5d035d4b23c370daff3da08cbb2467c4ace58e"
+    },
+    {
+      "path": "revit-mcp/tests/plan-drawing.test.mjs",
+      "sha256": "622846b68d2615605be32c7c3a538daf86f688a25ca407ed6b1849b5d1fb357a"
+    },
+    {
+      "path": "revit-mcp/tests/plan-graph.test.mjs",
+      "sha256": "79adebb268e5516f7834f70779a77f5f052239b79a804fb3afa280ac2d50e854"
+    },
+    {
+      "path": "revit-mcp/tests/reflection-probe.test.mjs",
+      "sha256": "8a72c740e14d34ab9dc618c44fe54a90b3057d7ea25e17b522d29e2ffef72ced"
+    },
+    {
+      "path": "revit-mcp/tests/variable-candidates.test.mjs",
+      "sha256": "ad6d156d43797ab483690faf120de68004cfa32527d7762e972099ddb1686ee4"
+    },
+    {
+      "path": "revit-mcp/tsconfig.json",
+      "sha256": "0669dc00b68475c1e385839b6d0405ee088223d7b32de6f6e497442d52554201"
+    },
+    {
+      "path": "revit-plugin/installer/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "revit-plugin/installer/install-dev.ps1",
+      "sha256": "22f16d5b06eff71a89f2b0c53dafccc932e8fbbf14e1011f3a88440973153c3e"
+    },
+    {
+      "path": "revit-plugin/installer/uninstall-dev.ps1",
+      "sha256": "0fc2e0961cfed3252d3bef9bcd6d8460b6fc4f0ddae27544e3cb9a8774217574"
+    },
+    {
+      "path": "revit-plugin/README.md",
+      "sha256": "59298da8ee04c7712ad1d694f03505009e7218c0639f09d52942470dfcba4765"
+    },
+    {
+      "path": "revit-plugin/src/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Bridge/BridgeServer.cs",
+      "sha256": "bd67e2697cbe3f4f7d1fb59bb3c113a94c0c4f717bc991ae5420d74068eb862c"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Bridge/Datumm.Bridge.csproj",
+      "sha256": "1876b00fa8e35eeebd43d45c2b4d1bb87ab7f2792a2d65b69ef6bd178263e5c6"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Bridge/DeletionOwnership.cs",
+      "sha256": "cc18eab8cd3cab059fb1d59f831c72d13ea4b3b5095b4f02cc01be4cd7550f68"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Bridge/DispatcherDiagnostics.cs",
+      "sha256": "7e749965b1d9f1f4cada04c3d9fe55d9e8314ac48a3e4ab9891057444bfb04ee"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Bridge/DraftingContracts.cs",
+      "sha256": "c893740f7b9e7d4647012fd2dad76aea665f249180987427dc7e866e191de1ae"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Bridge/ExistingMutationIdentityPolicy.cs",
+      "sha256": "6c41dd5d2cfdbd78209bcfc220d0c9f234b51c890e9b186cce484843b462ae57"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Bridge/packages.lock.json",
+      "sha256": "add2d0ea7db517668ed65a2fe6be37b50cdde8e7f97eda130b50f5c93272c7e8"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Bridge/Protocol.cs",
+      "sha256": "bc7de4b755003e880c978903238e8aafbc46ddf641321b7157eebd592565f611"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Bridge/ReflectionProbeRequest.cs",
+      "sha256": "87adcc5933dbad0bd0329f1e3ce070c74b033483357507e2185c8d658d07c1e9"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Bridge/SessionStore.cs",
+      "sha256": "1a67315cf8318f70349253284566a6b2128ab95e393aea1c8ddb6d6cb9078899"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Revit/Application.cs",
+      "sha256": "a77a9751c5030e9cf40aafe90b50a854450f8ab125b90e31c67f9cf83ae6b4e7"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Revit/ConnectionWindow.cs",
+      "sha256": "61a61f525e356bcf130493f1130430e312c0ccc471373a9737fc65ff3d7c6763"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Revit/Datumm.Revit.csproj",
+      "sha256": "26c6d73c0ee82b397f45274cc98a9d07da9cbcbad9e4278b80c5845f1bca4e32"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Revit/DraftingService.cs",
+      "sha256": "a5c566691b9395bc749a02964150e2360254941ea4fe18a9a4578ddd0db8bb6b"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Revit/ModelInspection.cs",
+      "sha256": "bceed0c46982fbb8d9e36a2d2e28cb52c44198ad1c4836e210bbbe83c1e163e2"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Revit/NativeExtensions.cs",
+      "sha256": "4c9c3b1a5768c598e703bc5bb30dc1b27789350ff47ac22976204d5d06978da1"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Revit/packages.lock.json",
+      "sha256": "8a02e919e9d682c33294d525dfcd3d005d12c0cd96113c202dc7abdd7ebf9f26"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Revit/ReadDispatcher.cs",
+      "sha256": "234fd589e12653d5a89c5dfe446e8d7fa69ab2ad0ae53fb46d95b82309716ca1"
+    },
+    {
+      "path": "revit-plugin/src/Datumm.Revit/ReflectionProbe.cs",
+      "sha256": "25fa31121152ea1992e9b8cd849d3eaebf896dc515d688cb1d4f592e48a0fff0"
+    },
+    {
+      "path": "revit-plugin/tests/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "revit-plugin/tests/Datumm.Bridge.TestHost/ContractChecks.cs",
+      "sha256": "6a2aebbbea8713a85caeff9ab515acd30eed9de409e95e1306f18af1e359c7f9"
+    },
+    {
+      "path": "revit-plugin/tests/Datumm.Bridge.TestHost/Datumm.Bridge.TestHost.csproj",
+      "sha256": "e6430309d44bc4b7085c677a4c1358df91d50bd99e43e581f5c40d5e7a314cb5"
+    },
+    {
+      "path": "revit-plugin/tests/Datumm.Bridge.TestHost/packages.lock.json",
+      "sha256": "8a02e919e9d682c33294d525dfcd3d005d12c0cd96113c202dc7abdd7ebf9f26"
+    },
+    {
+      "path": "revit-plugin/tests/Datumm.Bridge.TestHost/Program.cs",
+      "sha256": "d1bd92cc892732b3d205587d0a873482cd4e341d6605d0da6213098e616322d0"
+    },
+    {
+      "path": "revit-plugin/tests/Datumm.Bridge.TestHost/ReflectionProbeChecks.cs",
+      "sha256": "1f65b6b483de659d182129039156f32c4bd90edf1c059b92e073a72559e2df68"
+    },
+    {
+      "path": "scripts/generate-native-schema.mjs",
+      "sha256": "7f9fc15c46968dcbb186e93cae53c48c65168714e393e7792798b790f5aacfae"
+    },
+    {
+      "path": "scripts/package.ps1",
+      "sha256": "aa3230011f008df1cce37faffd2680a71307f4a3364104740ec7c41fb55fee86"
+    },
+    {
+      "path": "scripts/setup-node.ps1",
+      "sha256": "e3fdca6683ebaea3c890d74c574039ffd15ccf63b779ca782cb1e6d0fb9530a7"
+    },
+    {
+      "path": "scripts/verify-payload-runtime.mjs",
+      "sha256": "fd95e83f78897eddeb79312d29873526dd4cd8575be3f254da688ce6ffe3d2d2"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "4b8436aa175bec21d76ec9c79fab070558cdf3f8da20e127755244c753262446"
+    },
+    {
+      "path": "tests/integration/phase5-mvp/M05/F01-brief.json",
+      "sha256": "bd7c4e691bd79d16eb40c5acf3ee5104f3abbb05fe62e19977d7da1d288f3fb8"
+    },
+    {
+      "path": "tests/integration/phase5f-frozen-briefs.json",
+      "sha256": "687bf2b060e7861f3a8723932d1b3a22afb00fd23add7151c947ca0cd3582673"
+    },
+    {
+      "path": "tests/integration/phase5f-frozen-programs.json",
+      "sha256": "af89b77ccb373431f01a6061116a2484fd0338ed049028e8cb04ed3976bed120"
+    }
+  ]
+}

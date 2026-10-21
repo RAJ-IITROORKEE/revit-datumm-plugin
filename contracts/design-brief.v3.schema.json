@@ -1,0 +1,389 @@
+{
+  "$defs": {
+    "DimensionSource": {
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "enum": [
+            "footprint",
+            "parcel"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "sourceText": {
+          "maxLength": 240,
+          "minLength": 1,
+          "title": "Sourcetext",
+          "type": "string"
+        },
+        "widthMm": {
+          "maxLength": 24,
+          "pattern": "^\\d+(\\.\\d+)?$",
+          "title": "Widthmm",
+          "type": "string"
+        },
+        "depthMm": {
+          "maxLength": 24,
+          "pattern": "^\\d+(\\.\\d+)?$",
+          "title": "Depthmm",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "sourceText",
+        "widthMm",
+        "depthMm"
+      ],
+      "title": "DimensionSource",
+      "type": "object"
+    },
+    "Level": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "elevationMm": {
+          "default": 0,
+          "maximum": 10000,
+          "minimum": -10000,
+          "title": "Elevationmm",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "key",
+        "name"
+      ],
+      "title": "Level",
+      "type": "object"
+    },
+    "Parcel": {
+      "additionalProperties": false,
+      "properties": {
+        "widthMm": {
+          "maximum": 100000,
+          "minimum": 3000,
+          "title": "Widthmm",
+          "type": "integer"
+        },
+        "depthMm": {
+          "maximum": 100000,
+          "minimum": 3000,
+          "title": "Depthmm",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "widthMm",
+        "depthMm"
+      ],
+      "title": "Parcel",
+      "type": "object"
+    },
+    "RequirementV3": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "bedroom",
+            "bathroom",
+            "living",
+            "dining",
+            "living-dining",
+            "kitchen",
+            "circulation",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "minimumAreaMm2": {
+          "maximum": 400000000,
+          "minimum": 1000000,
+          "title": "Minimumareamm2",
+          "type": "integer"
+        },
+        "minimumClearWidthMm": {
+          "default": 700,
+          "maximum": 20000,
+          "minimum": 700,
+          "title": "Minimumclearwidthmm",
+          "type": "integer"
+        },
+        "adjacentTo": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Adjacentto",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "kind",
+        "minimumAreaMm2"
+      ],
+      "title": "RequirementV3",
+      "type": "object"
+    },
+    "SiteV3": {
+      "additionalProperties": false,
+      "properties": {
+        "widthMm": {
+          "maximum": 20000,
+          "minimum": 3000,
+          "title": "Widthmm",
+          "type": "integer"
+        },
+        "depthMm": {
+          "maximum": 20000,
+          "minimum": 3000,
+          "title": "Depthmm",
+          "type": "integer"
+        },
+        "entry": {
+          "enum": [
+            "north",
+            "south",
+            "east",
+            "west"
+          ],
+          "title": "Entry",
+          "type": "string"
+        }
+      },
+      "required": [
+        "widthMm",
+        "depthMm",
+        "entry"
+      ],
+      "title": "SiteV3",
+      "type": "object"
+    },
+    "SpatialContext": {
+      "additionalProperties": false,
+      "properties": {
+        "parcel": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Parcel"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "footprintOriginMm": {
+          "anyOf": [
+            {
+              "items": {
+                "maximum": 100000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Footprintoriginmm"
+        },
+        "setbacksMm": {
+          "anyOf": [
+            {
+              "items": {
+                "maximum": 100000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "maxItems": 4,
+              "minItems": 4,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Setbacksmm"
+        },
+        "footprintBasis": {
+          "enum": [
+            "explicit",
+            "provisional-envelope"
+          ],
+          "title": "Footprintbasis",
+          "type": "string"
+        },
+        "sourceDimensions": {
+          "items": {
+            "$ref": "#/$defs/DimensionSource"
+          },
+          "maxItems": 12,
+          "title": "Sourcedimensions",
+          "type": "array"
+        },
+        "setbackSource": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Setbacksource"
+        },
+        "northDegrees": {
+          "anyOf": [
+            {
+              "exclusiveMaximum": 360,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Northdegrees"
+        },
+        "coordinateFrame": {
+          "const": "footprint-local-xy-mm",
+          "default": "footprint-local-xy-mm",
+          "title": "Coordinateframe",
+          "type": "string"
+        }
+      },
+      "required": [
+        "footprintBasis"
+      ],
+      "title": "SpatialContext",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 3,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "briefId": {
+      "format": "uuid",
+      "title": "Briefid",
+      "type": "string"
+    },
+    "version": {
+      "maximum": 20,
+      "minimum": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "parentVersion": {
+      "anyOf": [
+        {
+          "maximum": 19,
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Parentversion"
+    },
+    "site": {
+      "$ref": "#/$defs/SiteV3"
+    },
+    "level": {
+      "$ref": "#/$defs/Level"
+    },
+    "wallHeightMm": {
+      "maximum": 4000,
+      "minimum": 2500,
+      "title": "Wallheightmm",
+      "type": "integer"
+    },
+    "requirements": {
+      "items": {
+        "$ref": "#/$defs/RequirementV3"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Requirements",
+      "type": "array"
+    },
+    "preferences": {
+      "items": {
+        "maxLength": 240,
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Preferences",
+      "type": "array"
+    },
+    "unresolvedConstraints": {
+      "items": {
+        "maxLength": 240,
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Unresolvedconstraints",
+      "type": "array"
+    },
+    "spatialContext": {
+      "$ref": "#/$defs/SpatialContext"
+    },
+    "dimensionIntents": {
+      "items": {
+        "enum": [
+          "overall",
+          "room-clear"
+        ],
+        "type": "string"
+      },
+      "maxItems": 2,
+      "title": "Dimensionintents",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "briefId",
+    "version",
+    "parentVersion",
+    "site",
+    "level",
+    "wallHeightMm",
+    "requirements",
+    "spatialContext"
+  ],
+  "title": "DesignBriefV3",
+  "type": "object"
+}

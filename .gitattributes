@@ -1,0 +1,10 @@
+* text=auto eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.mjs text eol=lf
+*.ts text eol=lf
+*.cs text eol=lf
+*.ps1 text eol=crlf
+*.sln text eol=crlf
+# Preserve byte hashes of actual downloaded CSV evidence.
+tests/integration/phase5-mvp/M10/hosted-export*/*.csv -text whitespace=cr-at-eol

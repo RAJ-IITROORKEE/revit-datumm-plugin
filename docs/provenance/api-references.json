@@ -1,0 +1,25 @@
+{
+  "references": [
+    {
+      "sha256": "1d7d5b4e33f0514e16c79dc9ccf5f31b09687fdadaf2709b74ab2f47a1bc601a",
+      "assemblyVersion": "26.0.4.0",
+      "packageVersion": "2026.0.4",
+      "fileVersion": "26.0.4.409",
+      "source": "https://www.nuget.org/packages/Nice3point.Revit.Api.RevitAPI/2026.0.4",
+      "package": "Nice3point.Revit.Api.RevitAPI",
+      "publisher": "Nice3point (third-party reference package)",
+      "use": "compile only; never committed or shipped"
+    },
+    {
+      "sha256": "0696d94e615cec7cc91adb6e0643cd15aef25f18faf83a439a55652f87aec3f3",
+      "assemblyVersion": "26.0.4.0",
+      "packageVersion": "2026.0.4",
+      "fileVersion": "26.0.4.409",
+      "source": "https://www.nuget.org/packages/Nice3point.Revit.Api.RevitAPIUI/2026.0.4",
+      "package": "Nice3point.Revit.Api.RevitAPIUI",
+      "publisher": "Nice3point (third-party reference package)",
+      "use": "compile only; never committed or shipped"
+    }
+  ],
+  "contentIntegrity": "See revit-plugin/src/Datumm.Revit/packages.lock.json"
+}

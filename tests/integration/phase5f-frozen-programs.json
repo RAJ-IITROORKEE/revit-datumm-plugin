@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "scope": "Conceptual orthogonal single-level search; no native acceptance",
+  "programs": [
+    {"id":"office","siteMm":[14000,12000],"entry":"south","rooms":[["reception","other",16000000],["meeting","other",18000000],["workroom","other",24000000],["bath","bathroom",4000000],["hall","circulation",6000000]]},
+    {"id":"workshop","siteMm":[16000,14000],"entry":"east","rooms":[["fabrication","other",36000000],["storage","other",12000000],["office","other",12000000],["hall","circulation",6000000]]},
+    {"id":"clinic","siteMm":[16000,14000],"entry":"west","rooms":[["waiting","other",18000000],["exam_one","other",14000000],["exam_two","other",14000000],["office","other",10000000],["bath","bathroom",4000000],["hall","circulation",6000000]]},
+    {"id":"single_studio","siteMm":[12000,10000],"entry":"north","rooms":[["studio","other",50000000]]}
+  ],
+  "limits": {"trials":768,"alternatives":3,"operations":100,"wallThicknessMm":150}
+}

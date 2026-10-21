@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 3,
+  "briefId": "11111111-1111-5111-8111-111111111111",
+  "version": 1,
+  "parentVersion": null,
+  "site": {
+    "widthMm": 9144,
+    "depthMm": 12192,
+    "entry": "south"
+  },
+  "level": {
+    "key": "l1",
+    "name": "Level 1",
+    "elevationMm": 0
+  },
+  "wallHeightMm": 3000,
+  "spatialContext": {
+    "parcel": null,
+    "footprintOriginMm": [
+      0,
+      0
+    ],
+    "setbacksMm": null,
+    "footprintBasis": "explicit",
+    "sourceDimensions": [
+      {
+        "role": "footprint",
+        "sourceText": "30 \u00d7 40 ft",
+        "widthMm": "9144",
+        "depthMm": "12192"
+      }
+    ],
+    "northDegrees": null,
+    "coordinateFrame": "footprint-local-xy-mm"
+  },
+  "requirements": [
+    {
+      "key": "bedroom-1",
+      "kind": "bedroom",
+      "minimumAreaMm2": 10000000,
+      "minimumClearWidthMm": 700,
+      "adjacentTo": []
+    },
+    {
+      "key": "bedroom-2",
+      "kind": "bedroom",
+      "minimumAreaMm2": 9000000,
+      "minimumClearWidthMm": 700,
+      "adjacentTo": []
+    },
+    {
+      "key": "bedroom-3",
+      "kind": "bedroom",
+      "minimumAreaMm2": 9000000,
+      "minimumClearWidthMm": 700,
+      "adjacentTo": []
+    },
+    {
+      "key": "living-dining",
+      "kind": "living-dining",
+      "minimumAreaMm2": 18000000,
+      "minimumClearWidthMm": 700,
+      "adjacentTo": []
+    },
+    {
+      "key": "kitchen",
+      "kind": "kitchen",
+      "minimumAreaMm2": 7000000,
+      "minimumClearWidthMm": 700,
+      "adjacentTo": []
+    },
+    {
+      "key": "bathroom-1",
+      "kind": "bathroom",
+      "minimumAreaMm2": 3000000,
+      "minimumClearWidthMm": 700,
+      "adjacentTo": []
+    },
+    {
+      "key": "bathroom-2",
+      "kind": "bathroom",
+      "minimumAreaMm2": 3000000,
+      "minimumClearWidthMm": 700,
+      "adjacentTo": []
+    },
+    {
+      "key": "circulation",
+      "kind": "circulation",
+      "minimumAreaMm2": 6000000,
+      "minimumClearWidthMm": 1200,
+      "adjacentTo": []
+    }
+  ],
+  "dimensionIntents": [
+    "overall",
+    "room-clear"
+  ],
+  "preferences": [],
+  "unresolvedConstraints": []
+}

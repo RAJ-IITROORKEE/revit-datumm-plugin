@@ -1,0 +1,24 @@
+{
+  "id": "datumm-3bhk-demo-001",
+  "status": "illustrative-targets-resolved-by-layout-v1-see-layout-json",
+  "units": "mm",
+  "coordinateFrame": "revit-internal-xy",
+  "boundary": { "width": 14000, "depth": 12000 },
+  "storeys": 1,
+  "wallHeight": 3000,
+  "rooms": [
+    { "name": "Bedroom 1", "targetAreaM2": 16 },
+    { "name": "Bedroom 2", "targetAreaM2": 14 },
+    { "name": "Bedroom 3", "targetAreaM2": 14 },
+    { "name": "Living and dining", "targetAreaM2": 30 },
+    { "name": "Kitchen", "targetAreaM2": 12 },
+    { "name": "Bathroom 1", "targetAreaM2": 5 },
+    { "name": "Bathroom 2", "targetAreaM2": 5 }
+  ],
+  "notes": [
+    "Illustrative assumptions to make the first demo reproducible, not user-specified site dimensions.",
+    "Reserve remaining space for circulation, wall thickness and layout adjustment.",
+    "Family types, levels and placement coordinates must be resolved and validated before execution.",
+    "No structural, statutory or construction-ready compliance claim."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@datumm/revit-mcp",
+  "version": "0.2.0-alpha.8",
+  "private": true,
+  "description": "Local read-only MCP server for DATUMM Revit automation",
+  "type": "module",
+  "engines": {
+    "node": ">=24.21.0 <25"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "ajv": "8.20.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "@types/node": "22.20.4"
+  }
+}

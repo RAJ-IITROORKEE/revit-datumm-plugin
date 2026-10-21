@@ -1,0 +1,2403 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datumm.dev/contracts/task-protocol.v2.schema.json",
+  "title": "DATUMM task protocol v2",
+  "$ref": "#/$defs/CommandRequest",
+  "$defs": {
+    "PlanRef": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "source": {
+          "default": "variable",
+          "enum": [
+            "variable",
+            "legacy_plan",
+            "legacy_draft"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "briefId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Briefid",
+          "type": "string"
+        },
+        "planId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Planid",
+          "type": "string"
+        },
+        "version": {
+          "maximum": 20,
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "fingerprint": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Fingerprint",
+          "type": "string"
+        }
+      },
+      "required": [
+        "briefId",
+        "planId",
+        "version",
+        "fingerprint"
+      ],
+      "title": "PlanRef",
+      "type": "object"
+    },
+    "Task": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "taskId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Taskid",
+          "type": "string"
+        },
+        "ownerId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Ownerid",
+          "type": "string"
+        },
+        "originalPrompt": {
+          "maxLength": 12000,
+          "minLength": 1,
+          "title": "Originalprompt",
+          "type": "string"
+        },
+        "goalVersion": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Goalversion",
+          "type": "integer"
+        },
+        "taskVersion": {
+          "minimum": 1,
+          "title": "Taskversion",
+          "type": "integer"
+        },
+        "mode": {
+          "enum": [
+            "ask",
+            "plan",
+            "build"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "model": {
+          "default": "openai/gpt-6-luna",
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "reasoningEffort": {
+          "default": "high",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "title": "Reasoningeffort",
+          "type": "string"
+        },
+        "modelContextRequirement": {
+          "default": "auto",
+          "enum": [
+            "auto",
+            "read",
+            "none",
+            "write"
+          ],
+          "title": "Modelcontextrequirement",
+          "type": "string"
+        },
+        "status": {
+          "maxLength": 80,
+          "title": "Status",
+          "type": "string"
+        },
+        "graphVersion": {
+          "default": "legacy-agent-v1",
+          "maxLength": 80,
+          "title": "Graphversion",
+          "type": "string"
+        },
+        "policyVersion": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Policyversion",
+          "type": "integer"
+        },
+        "currentPlanRef": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PlanRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "taskId",
+        "ownerId",
+        "originalPrompt",
+        "taskVersion",
+        "mode",
+        "status"
+      ],
+      "title": "Task",
+      "type": "object"
+    },
+    "BriefFact": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "field": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Field",
+          "type": "string"
+        },
+        "sourceSpan": {
+          "maxLength": 12000,
+          "title": "Sourcespan",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "maxLength": 12000,
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "units": {
+          "anyOf": [
+            {
+              "maxLength": 40,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Units"
+        },
+        "provenance": {
+          "enum": [
+            "explicit",
+            "answered",
+            "assumed",
+            "unknown"
+          ],
+          "title": "Provenance",
+          "type": "string"
+        }
+      },
+      "required": [
+        "field",
+        "sourceSpan",
+        "value",
+        "provenance"
+      ],
+      "title": "BriefFact",
+      "type": "object"
+    },
+    "PlanStep": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "stepId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Stepid",
+          "type": "string"
+        },
+        "dependencies": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 40,
+          "title": "Dependencies",
+          "type": "array"
+        },
+        "inputRefs": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 40,
+          "title": "Inputrefs",
+          "type": "array"
+        },
+        "inputVersion": {
+          "minimum": 1,
+          "title": "Inputversion",
+          "type": "integer"
+        },
+        "capability": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Capability",
+          "type": "string"
+        },
+        "outputSchema": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Outputschema",
+          "type": "string"
+        },
+        "completionPredicates": {
+          "items": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Completionpredicates",
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "running",
+            "blocked",
+            "completed",
+            "invalidated",
+            "cancelled"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "attempts": {
+          "default": 0,
+          "maximum": 20,
+          "minimum": 0,
+          "title": "Attempts",
+          "type": "integer"
+        },
+        "maxAttempts": {
+          "default": 1,
+          "maximum": 20,
+          "minimum": 1,
+          "title": "Maxattempts",
+          "type": "integer"
+        },
+        "budgetRef": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Budgetref",
+          "type": "string"
+        },
+        "invalidationDependencies": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 40,
+          "title": "Invalidationdependencies",
+          "type": "array"
+        },
+        "cancelled": {
+          "default": false,
+          "title": "Cancelled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "stepId",
+        "inputVersion",
+        "capability",
+        "outputSchema",
+        "completionPredicates",
+        "status",
+        "budgetRef"
+      ],
+      "title": "PlanStep",
+      "type": "object"
+    },
+    "Job": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "jobId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Jobid",
+          "type": "string"
+        },
+        "taskId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Taskid",
+          "type": "string"
+        },
+        "stepId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Stepid",
+          "type": "string"
+        },
+        "role": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Role",
+          "type": "string"
+        },
+        "checkpointNamespace": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Checkpointnamespace",
+          "type": "string"
+        },
+        "leaseUntil": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Leaseuntil"
+        },
+        "fencingToken": {
+          "minimum": 0,
+          "title": "Fencingtoken",
+          "type": "integer"
+        },
+        "inputDigest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Inputdigest",
+          "type": "string"
+        },
+        "goalVersion": {
+          "minimum": 1,
+          "title": "Goalversion",
+          "type": "integer"
+        },
+        "planVersion": {
+          "minimum": 0,
+          "title": "Planversion",
+          "type": "integer"
+        },
+        "documentRevision": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Documentrevision"
+        },
+        "deadline": {
+          "title": "Deadline",
+          "type": "string"
+        },
+        "deduplicationKey": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Deduplicationkey",
+          "type": "string"
+        },
+        "resultRefs": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 40,
+          "title": "Resultrefs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "jobId",
+        "taskId",
+        "stepId",
+        "role",
+        "checkpointNamespace",
+        "leaseUntil",
+        "fencingToken",
+        "inputDigest",
+        "goalVersion",
+        "planVersion",
+        "deadline",
+        "deduplicationKey"
+      ],
+      "title": "Job",
+      "type": "object"
+    },
+    "Question": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "questionId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Questionid",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "affectedFields": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 40,
+          "title": "Affectedfields",
+          "type": "array"
+        },
+        "affectedSteps": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 40,
+          "title": "Affectedsteps",
+          "type": "array"
+        },
+        "blockingReason": {
+          "maxLength": 2000,
+          "title": "Blockingreason",
+          "type": "string"
+        },
+        "options": {
+          "items": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Options",
+          "type": "array"
+        },
+        "units": {
+          "anyOf": [
+            {
+              "maxLength": 40,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Units"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "answerReceiptId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Answerreceiptid"
+        }
+      },
+      "required": [
+        "questionId",
+        "version",
+        "affectedFields",
+        "affectedSteps",
+        "blockingReason"
+      ],
+      "title": "Question",
+      "type": "object"
+    },
+    "Acceptance": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "plan": {
+          "$ref": "#/$defs/PlanRef"
+        },
+        "acceptedAssumptions": {
+          "items": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "maxItems": 40,
+          "title": "Acceptedassumptions",
+          "type": "array"
+        },
+        "userId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Userid",
+          "type": "string"
+        },
+        "acceptedAt": {
+          "title": "Acceptedat",
+          "type": "string"
+        },
+        "commandId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Commandid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "plan",
+        "userId",
+        "acceptedAt",
+        "commandId"
+      ],
+      "title": "Acceptance",
+      "type": "object"
+    },
+    "BuildIntent": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "acceptance": {
+          "$ref": "#/$defs/Acceptance"
+        },
+        "modeCommandId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Modecommandid",
+          "type": "string"
+        },
+        "deviceId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Deviceid",
+          "type": "string"
+        },
+        "sessionId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "documentId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Documentid",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 0,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "levelId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Levelid",
+          "type": "string"
+        },
+        "viewId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Viewid",
+          "type": "string"
+        },
+        "transformDigest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Transformdigest",
+          "type": "string"
+        },
+        "typeIds": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 40,
+          "title": "Typeids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "acceptance",
+        "modeCommandId",
+        "deviceId",
+        "sessionId",
+        "documentId",
+        "revision",
+        "levelId",
+        "viewId",
+        "transformDigest",
+        "typeIds"
+      ],
+      "title": "BuildIntent",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "evidenceId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Evidenceid",
+          "type": "string"
+        },
+        "sourceTool": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Sourcetool",
+          "type": "string"
+        },
+        "sessionId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "documentId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Documentid",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 0,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "scopeDigest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Scopedigest",
+          "type": "string"
+        },
+        "levelId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Levelid"
+        },
+        "viewId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Viewid"
+        },
+        "phaseId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Phaseid"
+        },
+        "linkId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Linkid"
+        },
+        "transformDigest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transformdigest"
+        },
+        "coverage": {
+          "enum": [
+            "complete",
+            "partial",
+            "unknown"
+          ],
+          "title": "Coverage",
+          "type": "string"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cursor"
+        },
+        "capturedAt": {
+          "title": "Capturedat",
+          "type": "string"
+        },
+        "digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Digest",
+          "type": "string"
+        },
+        "payloadRefs": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 40,
+          "title": "Payloadrefs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "evidenceId",
+        "sourceTool",
+        "sessionId",
+        "documentId",
+        "revision",
+        "scopeDigest",
+        "coverage",
+        "capturedAt",
+        "digest",
+        "payloadRefs"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "NativeOperation": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "operationId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Operationid",
+          "type": "string"
+        },
+        "proposalId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Proposalid",
+          "type": "string"
+        },
+        "approvalHash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Approvalhash",
+          "type": "string"
+        },
+        "exactChangesRef": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Exactchangesref",
+          "type": "string"
+        },
+        "preconditionsRef": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Preconditionsref",
+          "type": "string"
+        },
+        "authorizationRef": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Authorizationref",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "requested",
+            "submitted",
+            "unknown",
+            "rolled_back",
+            "committed",
+            "verified"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "receiptRef": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Receiptref"
+        },
+        "elementKeys": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 10000,
+          "title": "Elementkeys",
+          "type": "array"
+        }
+      },
+      "required": [
+        "operationId",
+        "proposalId",
+        "approvalHash",
+        "exactChangesRef",
+        "preconditionsRef",
+        "authorizationRef",
+        "state"
+      ],
+      "title": "NativeOperation",
+      "type": "object"
+    },
+    "Memory": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "exactRefs": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Exactrefs",
+          "type": "array"
+        },
+        "derivedSummary": {
+          "maxLength": 12000,
+          "title": "Derivedsummary",
+          "type": "string"
+        },
+        "sourceDigests": {
+          "items": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Sourcedigests",
+          "type": "array"
+        },
+        "protectedDigests": {
+          "items": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Protecteddigests",
+          "type": "array"
+        },
+        "compactionVersion": {
+          "minimum": 0,
+          "title": "Compactionversion",
+          "type": "integer"
+        },
+        "eventCursor": {
+          "minimum": 0,
+          "title": "Eventcursor",
+          "type": "integer"
+        },
+        "unresolvedOperationIds": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 40,
+          "title": "Unresolvedoperationids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "exactRefs",
+        "derivedSummary",
+        "sourceDigests",
+        "protectedDigests",
+        "compactionVersion",
+        "eventCursor",
+        "unresolvedOperationIds"
+      ],
+      "title": "Memory",
+      "type": "object"
+    },
+    "Submit": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "type": {
+          "const": "submit",
+          "title": "Type",
+          "type": "string"
+        },
+        "prompt": {
+          "maxLength": 12000,
+          "minLength": 1,
+          "title": "Prompt",
+          "type": "string"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "reasoningEffort": {
+          "anyOf": [
+            {
+              "enum": [
+                "low",
+                "medium",
+                "high"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reasoningeffort"
+        },
+        "mode": {
+          "default": "plan",
+          "enum": [
+            "ask",
+            "plan",
+            "build"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "modelContextRequirement": {
+          "default": "auto",
+          "enum": [
+            "auto",
+            "read"
+          ],
+          "title": "Modelcontextrequirement",
+          "type": "string"
+        },
+        "deviceId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Deviceid"
+        },
+        "recipe": {
+          "default": false,
+          "title": "Recipe",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "type",
+        "prompt"
+      ],
+      "title": "Submit",
+      "type": "object"
+    },
+    "Amend": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "type": {
+          "const": "amend",
+          "title": "Type",
+          "type": "string"
+        },
+        "prompt": {
+          "maxLength": 12000,
+          "minLength": 1,
+          "title": "Prompt",
+          "type": "string"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "reasoningEffort": {
+          "anyOf": [
+            {
+              "enum": [
+                "low",
+                "medium",
+                "high"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reasoningeffort"
+        },
+        "modelContextRequirement": {
+          "anyOf": [
+            {
+              "enum": [
+                "auto",
+                "read"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Modelcontextrequirement"
+        },
+        "deviceId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Deviceid"
+        }
+      },
+      "required": [
+        "type",
+        "prompt"
+      ],
+      "title": "Amend",
+      "type": "object"
+    },
+    "QuestionAnswer": {
+      "additionalProperties": false,
+      "properties": {
+        "question_id": {
+          "maxLength": 40,
+          "minLength": 1,
+          "title": "Question Id",
+          "type": "string"
+        },
+        "option_id": {
+          "anyOf": [
+            {
+              "maxLength": 40,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Option Id"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "maxLength": 1000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        }
+      },
+      "required": [
+        "question_id"
+      ],
+      "title": "QuestionAnswer",
+      "type": "object"
+    },
+    "Answer": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "type": {
+          "const": "answer",
+          "title": "Type",
+          "type": "string"
+        },
+        "questionId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Questionid",
+          "type": "string"
+        },
+        "questionVersion": {
+          "minimum": 1,
+          "title": "Questionversion",
+          "type": "integer"
+        },
+        "answer": {
+          "anyOf": [
+            {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Answer"
+        },
+        "answers": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/QuestionAnswer"
+              },
+              "maxItems": 4,
+              "minItems": 1,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Answers"
+        }
+      },
+      "required": [
+        "type",
+        "questionId",
+        "questionVersion"
+      ],
+      "title": "Answer",
+      "type": "object"
+    },
+    "AcceptPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "type": {
+          "const": "accept_plan",
+          "title": "Type",
+          "type": "string"
+        },
+        "plan": {
+          "$ref": "#/$defs/PlanRef"
+        },
+        "acceptedAssumptions": {
+          "items": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "maxItems": 40,
+          "title": "Acceptedassumptions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "type",
+        "plan"
+      ],
+      "title": "AcceptPlan",
+      "type": "object"
+    },
+    "ChangeMode": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "type": {
+          "const": "change_mode",
+          "title": "Type",
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "ask",
+            "plan",
+            "build"
+          ],
+          "title": "Mode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "mode"
+      ],
+      "title": "ChangeMode",
+      "type": "object"
+    },
+    "NativePlacement": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "sessionId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "documentId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Documentid",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 0,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "levelId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Levelid",
+          "type": "string"
+        },
+        "viewId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Viewid",
+          "type": "string"
+        },
+        "originXmm": {
+          "maximum": 900000,
+          "minimum": -900000,
+          "title": "Originxmm",
+          "type": "number"
+        },
+        "originYmm": {
+          "maximum": 900000,
+          "minimum": -900000,
+          "title": "Originymm",
+          "type": "number"
+        },
+        "rotationDegrees": {
+          "exclusiveMaximum": 360,
+          "minimum": 0,
+          "title": "Rotationdegrees",
+          "type": "number"
+        }
+      },
+      "required": [
+        "sessionId",
+        "documentId",
+        "revision",
+        "levelId",
+        "viewId",
+        "originXmm",
+        "originYmm",
+        "rotationDegrees"
+      ],
+      "title": "NativePlacement",
+      "type": "object"
+    },
+    "PrepareBuild": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "type": {
+          "const": "prepare_build",
+          "title": "Type",
+          "type": "string"
+        },
+        "deviceId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Deviceid",
+          "type": "string"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "reasoningEffort": {
+          "anyOf": [
+            {
+              "enum": [
+                "low",
+                "medium",
+                "high"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reasoningeffort"
+        },
+        "selectionRevision": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selectionrevision"
+        },
+        "placement": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NativePlacement"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "type",
+        "deviceId"
+      ],
+      "title": "PrepareBuild",
+      "type": "object"
+    },
+    "ChatFollowup": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "type": {
+          "const": "chat_followup",
+          "title": "Type",
+          "type": "string"
+        },
+        "prompt": {
+          "maxLength": 12000,
+          "minLength": 1,
+          "title": "Prompt",
+          "type": "string"
+        },
+        "visiblePlan": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PlanRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "acceptedAssumptions": {
+          "items": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "maxItems": 40,
+          "title": "Acceptedassumptions",
+          "type": "array"
+        },
+        "deviceId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Deviceid"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "reasoningEffort": {
+          "anyOf": [
+            {
+              "enum": [
+                "low",
+                "medium",
+                "high"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reasoningeffort"
+        },
+        "modelContextRequirement": {
+          "anyOf": [
+            {
+              "enum": [
+                "auto",
+                "read"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Modelcontextrequirement"
+        },
+        "placement": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NativePlacement"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "type",
+        "prompt"
+      ],
+      "title": "ChatFollowup",
+      "type": "object"
+    },
+    "ApproveExact": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "type": {
+          "const": "approve_exact_proposal",
+          "title": "Type",
+          "type": "string"
+        },
+        "proposalId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Proposalid",
+          "type": "string"
+        },
+        "approvalHash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Approvalhash",
+          "type": "string"
+        },
+        "documentId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Documentid",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 0,
+          "title": "Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "type",
+        "proposalId",
+        "approvalHash",
+        "documentId",
+        "revision"
+      ],
+      "title": "ApproveExact",
+      "type": "object"
+    },
+    "Control": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "type": {
+          "enum": [
+            "pause",
+            "continue",
+            "cancel",
+            "inspect_result"
+          ],
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "Control",
+      "type": "object"
+    },
+    "RefreshExact": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "type": {
+          "const": "refresh_exact_proposal",
+          "title": "Type",
+          "type": "string"
+        },
+        "proposalId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Proposalid",
+          "type": "string"
+        },
+        "approvalHash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Approvalhash",
+          "type": "string"
+        },
+        "documentId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Documentid",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 0,
+          "title": "Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "type",
+        "proposalId",
+        "approvalHash",
+        "documentId",
+        "revision"
+      ],
+      "title": "RefreshExact",
+      "type": "object"
+    },
+    "CompareResult": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "type": {
+          "const": "compare_result",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "CompareResult",
+      "type": "object"
+    },
+    "BuildFeedback": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "type": {
+          "const": "build_feedback",
+          "title": "Type",
+          "type": "string"
+        },
+        "prompt": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Prompt",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "prompt"
+      ],
+      "title": "BuildFeedback",
+      "type": "object"
+    },
+    "PrepareRevision": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "type": {
+          "const": "prepare_revision",
+          "title": "Type",
+          "type": "string"
+        },
+        "feedbackId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Feedbackid",
+          "type": "string"
+        },
+        "comparisonId": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Comparisonid",
+          "type": "string"
+        },
+        "targetKey": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Targetkey",
+          "type": "string"
+        },
+        "action": {
+          "enum": [
+            "move",
+            "delete"
+          ],
+          "title": "Action",
+          "type": "string"
+        },
+        "deltaXmm": {
+          "default": 0,
+          "maximum": 2000,
+          "minimum": -2000,
+          "title": "Deltaxmm",
+          "type": "number"
+        },
+        "deltaYmm": {
+          "default": 0,
+          "maximum": 2000,
+          "minimum": -2000,
+          "title": "Deltaymm",
+          "type": "number"
+        }
+      },
+      "required": [
+        "type",
+        "feedbackId",
+        "comparisonId",
+        "targetKey",
+        "action"
+      ],
+      "title": "PrepareRevision",
+      "type": "object"
+    },
+    "ReviewResult": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "type": {
+          "const": "review_result",
+          "title": "Type",
+          "type": "string"
+        },
+        "comparisonId": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Comparisonid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "comparisonId"
+      ],
+      "title": "ReviewResult",
+      "type": "object"
+    },
+    "CommandRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "idempotencyKey": {
+          "maxLength": 128,
+          "minLength": 8,
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "expectedTaskVersion": {
+          "minimum": 0,
+          "title": "Expectedtaskversion",
+          "type": "integer"
+        },
+        "expectedPlanVersion": {
+          "maximum": 20,
+          "minimum": 0,
+          "title": "Expectedplanversion",
+          "type": "integer"
+        },
+        "command": {
+          "discriminator": {
+            "mapping": {
+              "accept_plan": "#/$defs/AcceptPlan",
+              "amend": "#/$defs/Amend",
+              "answer": "#/$defs/Answer",
+              "approve_exact_proposal": "#/$defs/ApproveExact",
+              "build_feedback": "#/$defs/BuildFeedback",
+              "cancel": "#/$defs/Control",
+              "change_mode": "#/$defs/ChangeMode",
+              "chat_followup": "#/$defs/ChatFollowup",
+              "compare_result": "#/$defs/CompareResult",
+              "continue": "#/$defs/Control",
+              "inspect_result": "#/$defs/Control",
+              "pause": "#/$defs/Control",
+              "prepare_build": "#/$defs/PrepareBuild",
+              "prepare_revision": "#/$defs/PrepareRevision",
+              "refresh_exact_proposal": "#/$defs/RefreshExact",
+              "review_result": "#/$defs/ReviewResult",
+              "submit": "#/$defs/Submit"
+            },
+            "propertyName": "type"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Submit"
+            },
+            {
+              "$ref": "#/$defs/Amend"
+            },
+            {
+              "$ref": "#/$defs/ChatFollowup"
+            },
+            {
+              "$ref": "#/$defs/Answer"
+            },
+            {
+              "$ref": "#/$defs/AcceptPlan"
+            },
+            {
+              "$ref": "#/$defs/ChangeMode"
+            },
+            {
+              "$ref": "#/$defs/PrepareBuild"
+            },
+            {
+              "$ref": "#/$defs/ApproveExact"
+            },
+            {
+              "$ref": "#/$defs/RefreshExact"
+            },
+            {
+              "$ref": "#/$defs/Control"
+            },
+            {
+              "$ref": "#/$defs/CompareResult"
+            },
+            {
+              "$ref": "#/$defs/BuildFeedback"
+            },
+            {
+              "$ref": "#/$defs/PrepareRevision"
+            },
+            {
+              "$ref": "#/$defs/ReviewResult"
+            }
+          ],
+          "title": "Command"
+        }
+      },
+      "required": [
+        "idempotencyKey",
+        "expectedTaskVersion",
+        "expectedPlanVersion",
+        "command"
+      ],
+      "title": "CommandRequest",
+      "type": "object"
+    },
+    "PublicEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "eventId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Eventid",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 1,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "taskId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Taskid",
+          "type": "string"
+        },
+        "stepId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stepid"
+        },
+        "jobId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Jobid"
+        },
+        "operationId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Operationid"
+        },
+        "goalVersion": {
+          "minimum": 1,
+          "title": "Goalversion",
+          "type": "integer"
+        },
+        "planVersion": {
+          "minimum": 0,
+          "title": "Planversion",
+          "type": "integer"
+        },
+        "stage": {
+          "maxLength": 80,
+          "title": "Stage",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "activity",
+            "command",
+            "snapshot"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "summary": {
+          "maxLength": 2000,
+          "title": "Summary",
+          "type": "string"
+        },
+        "progress": {
+          "anyOf": [
+            {
+              "maximum": 100,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Progress"
+        },
+        "artifactRefs": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 40,
+          "title": "Artifactrefs",
+          "type": "array"
+        },
+        "at": {
+          "title": "At",
+          "type": "string"
+        },
+        "index": {
+          "minimum": 0,
+          "title": "Index",
+          "type": "integer"
+        },
+        "detail": {
+          "maxLength": 2000,
+          "title": "Detail",
+          "type": "string"
+        },
+        "tool": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tool"
+        },
+        "controlOutcome": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Controloutcome"
+        },
+        "failureCode": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Failurecode"
+        },
+        "recoveryAction": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recoveryaction"
+        },
+        "counts": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "integer"
+              },
+              "maxProperties": 16,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Counts"
+        }
+      },
+      "required": [
+        "eventId",
+        "sequence",
+        "taskId",
+        "goalVersion",
+        "planVersion",
+        "stage",
+        "type",
+        "summary",
+        "at",
+        "index",
+        "detail"
+      ],
+      "title": "PublicEvent",
+      "type": "object"
+    },
+    "PublicTask": {
+      "additionalProperties": true,
+      "description": "v2 envelope plus the allowlisted v1 inspector data, not arbitrary storage.",
+      "properties": {
+        "schemaVersion": {
+          "const": 2,
+          "default": 2,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "taskId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Taskid",
+          "type": "string"
+        },
+        "taskVersion": {
+          "minimum": 0,
+          "title": "Taskversion",
+          "type": "integer"
+        },
+        "goalVersion": {
+          "minimum": 1,
+          "title": "Goalversion",
+          "type": "integer"
+        },
+        "originalPrompt": {
+          "maxLength": 12000,
+          "minLength": 1,
+          "title": "Originalprompt",
+          "type": "string"
+        },
+        "executionId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Executionid"
+        },
+        "currentPlanRef": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PlanRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "acceptance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Acceptance"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "mode": {
+          "enum": [
+            "ask",
+            "plan",
+            "build"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "model": {
+          "default": "openai/gpt-6-luna",
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "reasoningEffort": {
+          "default": "high",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "title": "Reasoningeffort",
+          "type": "string"
+        },
+        "goalStatus": {
+          "title": "Goalstatus",
+          "type": "string"
+        },
+        "eventCursor": {
+          "minimum": 0,
+          "title": "Eventcursor",
+          "type": "integer"
+        },
+        "events": {
+          "items": {
+            "$ref": "#/$defs/PublicEvent"
+          },
+          "maxItems": 2000,
+          "title": "Events",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "taskId",
+        "taskVersion",
+        "goalVersion",
+        "originalPrompt",
+        "mode",
+        "goalStatus",
+        "eventCursor",
+        "events"
+      ],
+      "title": "PublicTask",
+      "type": "object"
+    }
+  }
+}

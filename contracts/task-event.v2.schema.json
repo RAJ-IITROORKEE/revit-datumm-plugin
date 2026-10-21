@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datumm.dev/contracts/task-event.v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 2,
+      "default": 2,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "eventId": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Eventid",
+      "type": "string"
+    },
+    "sequence": {
+      "minimum": 1,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "taskId": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Taskid",
+      "type": "string"
+    },
+    "stepId": {
+      "anyOf": [
+        {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stepid"
+    },
+    "jobId": {
+      "anyOf": [
+        {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Jobid"
+    },
+    "operationId": {
+      "anyOf": [
+        {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Operationid"
+    },
+    "goalVersion": {
+      "minimum": 1,
+      "title": "Goalversion",
+      "type": "integer"
+    },
+    "planVersion": {
+      "minimum": 0,
+      "title": "Planversion",
+      "type": "integer"
+    },
+    "stage": {
+      "maxLength": 80,
+      "title": "Stage",
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "activity",
+        "command",
+        "snapshot"
+      ],
+      "title": "Type",
+      "type": "string"
+    },
+    "summary": {
+      "maxLength": 2000,
+      "title": "Summary",
+      "type": "string"
+    },
+    "progress": {
+      "anyOf": [
+        {
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Progress"
+    },
+    "artifactRefs": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 40,
+      "title": "Artifactrefs",
+      "type": "array"
+    },
+    "at": {
+      "title": "At",
+      "type": "string"
+    },
+    "index": {
+      "minimum": 0,
+      "title": "Index",
+      "type": "integer"
+    },
+    "detail": {
+      "maxLength": 2000,
+      "title": "Detail",
+      "type": "string"
+    },
+    "tool": {
+      "anyOf": [
+        {
+          "maxLength": 80,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tool"
+    },
+    "controlOutcome": {
+      "anyOf": [
+        {
+          "maxLength": 80,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Controloutcome"
+    },
+    "failureCode": {
+      "anyOf": [
+        {
+          "maxLength": 80,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Failurecode"
+    },
+    "recoveryAction": {
+      "anyOf": [
+        {
+          "maxLength": 80,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Recoveryaction"
+    },
+    "counts": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "maxProperties": 16,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Counts"
+    }
+  },
+  "required": [
+    "eventId",
+    "sequence",
+    "taskId",
+    "goalVersion",
+    "planVersion",
+    "stage",
+    "type",
+    "summary",
+    "at",
+    "index",
+    "detail"
+  ],
+  "title": "PublicEvent",
+  "type": "object"
+}

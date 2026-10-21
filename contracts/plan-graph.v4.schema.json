@@ -1,0 +1,768 @@
+{
+  "$defs": {
+    "ClearDimension": {
+      "additionalProperties": false,
+      "properties": {
+        "roomKey": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Roomkey",
+          "type": "string"
+        },
+        "widthMm": {
+          "exclusiveMinimum": 0,
+          "maximum": 20000,
+          "title": "Widthmm",
+          "type": "number"
+        },
+        "depthMm": {
+          "exclusiveMinimum": 0,
+          "maximum": 20000,
+          "title": "Depthmm",
+          "type": "number"
+        }
+      },
+      "required": [
+        "roomKey",
+        "widthMm",
+        "depthMm"
+      ],
+      "title": "ClearDimension",
+      "type": "object"
+    },
+    "DimensionSource": {
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "enum": [
+            "footprint",
+            "parcel"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "sourceText": {
+          "maxLength": 240,
+          "minLength": 1,
+          "title": "Sourcetext",
+          "type": "string"
+        },
+        "widthMm": {
+          "maxLength": 24,
+          "pattern": "^\\d+(\\.\\d+)?$",
+          "title": "Widthmm",
+          "type": "string"
+        },
+        "depthMm": {
+          "maxLength": 24,
+          "pattern": "^\\d+(\\.\\d+)?$",
+          "title": "Depthmm",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "sourceText",
+        "widthMm",
+        "depthMm"
+      ],
+      "title": "DimensionSource",
+      "type": "object"
+    },
+    "FurnitureIntent": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "roomKey": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Roomkey",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "bed",
+            "table",
+            "sofa",
+            "storage"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "rect": {
+          "items": {
+            "maximum": 20000,
+            "minimum": 0,
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Rect",
+          "type": "array"
+        },
+        "status": {
+          "const": "proposed",
+          "default": "proposed",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "roomKey",
+        "kind",
+        "rect"
+      ],
+      "title": "FurnitureIntent",
+      "type": "object"
+    },
+    "Level": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "elevationMm": {
+          "default": 0,
+          "maximum": 10000,
+          "minimum": -10000,
+          "title": "Elevationmm",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "key",
+        "name"
+      ],
+      "title": "Level",
+      "type": "object"
+    },
+    "Opening": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "wallKey": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Wallkey",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "door",
+            "window"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "offsetMm": {
+          "maximum": 20000,
+          "minimum": 0,
+          "title": "Offsetmm",
+          "type": "number"
+        },
+        "widthMm": {
+          "maximum": 20000,
+          "minimum": 1,
+          "title": "Widthmm",
+          "type": "number"
+        },
+        "heightMm": {
+          "maximum": 20000,
+          "minimum": 1,
+          "title": "Heightmm",
+          "type": "number"
+        },
+        "sillMm": {
+          "maximum": 20000,
+          "minimum": 0,
+          "title": "Sillmm",
+          "type": "number"
+        }
+      },
+      "required": [
+        "key",
+        "wallKey",
+        "kind",
+        "offsetMm",
+        "widthMm",
+        "heightMm",
+        "sillMm"
+      ],
+      "title": "Opening",
+      "type": "object"
+    },
+    "Parcel": {
+      "additionalProperties": false,
+      "properties": {
+        "widthMm": {
+          "maximum": 100000,
+          "minimum": 3000,
+          "title": "Widthmm",
+          "type": "integer"
+        },
+        "depthMm": {
+          "maximum": 100000,
+          "minimum": 3000,
+          "title": "Depthmm",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "widthMm",
+        "depthMm"
+      ],
+      "title": "Parcel",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "enum": [
+            "deterministic",
+            "model-suggested",
+            "user-revised"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "briefId": {
+          "format": "uuid",
+          "title": "Briefid",
+          "type": "string"
+        },
+        "briefVersion": {
+          "maximum": 20,
+          "minimum": 1,
+          "title": "Briefversion",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "source",
+        "briefId",
+        "briefVersion"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "RequirementV3": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "bedroom",
+            "bathroom",
+            "living",
+            "dining",
+            "living-dining",
+            "kitchen",
+            "circulation",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "minimumAreaMm2": {
+          "maximum": 400000000,
+          "minimum": 1000000,
+          "title": "Minimumareamm2",
+          "type": "integer"
+        },
+        "minimumClearWidthMm": {
+          "default": 700,
+          "maximum": 20000,
+          "minimum": 700,
+          "title": "Minimumclearwidthmm",
+          "type": "integer"
+        },
+        "adjacentTo": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Adjacentto",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "kind",
+        "minimumAreaMm2"
+      ],
+      "title": "RequirementV3",
+      "type": "object"
+    },
+    "Room": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "bedroom",
+            "bathroom",
+            "living",
+            "dining",
+            "living-dining",
+            "kitchen",
+            "circulation",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "rect": {
+          "items": {
+            "maximum": 20000,
+            "minimum": 0,
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Rect",
+          "type": "array"
+        },
+        "areaMm2": {
+          "exclusiveMinimum": 0,
+          "maximum": 400000000,
+          "title": "Areamm2",
+          "type": "number"
+        },
+        "adjacentTo": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Adjacentto",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "name",
+        "kind",
+        "rect",
+        "areaMm2"
+      ],
+      "title": "Room",
+      "type": "object"
+    },
+    "SiteV3": {
+      "additionalProperties": false,
+      "properties": {
+        "widthMm": {
+          "maximum": 20000,
+          "minimum": 3000,
+          "title": "Widthmm",
+          "type": "integer"
+        },
+        "depthMm": {
+          "maximum": 20000,
+          "minimum": 3000,
+          "title": "Depthmm",
+          "type": "integer"
+        },
+        "entry": {
+          "enum": [
+            "north",
+            "south",
+            "east",
+            "west"
+          ],
+          "title": "Entry",
+          "type": "string"
+        }
+      },
+      "required": [
+        "widthMm",
+        "depthMm",
+        "entry"
+      ],
+      "title": "SiteV3",
+      "type": "object"
+    },
+    "SpatialContext": {
+      "additionalProperties": false,
+      "properties": {
+        "parcel": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Parcel"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "footprintOriginMm": {
+          "anyOf": [
+            {
+              "items": {
+                "maximum": 100000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Footprintoriginmm"
+        },
+        "setbacksMm": {
+          "anyOf": [
+            {
+              "items": {
+                "maximum": 100000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "maxItems": 4,
+              "minItems": 4,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Setbacksmm"
+        },
+        "footprintBasis": {
+          "enum": [
+            "explicit",
+            "provisional-envelope"
+          ],
+          "title": "Footprintbasis",
+          "type": "string"
+        },
+        "sourceDimensions": {
+          "items": {
+            "$ref": "#/$defs/DimensionSource"
+          },
+          "maxItems": 12,
+          "title": "Sourcedimensions",
+          "type": "array"
+        },
+        "setbackSource": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Setbacksource"
+        },
+        "northDegrees": {
+          "anyOf": [
+            {
+              "exclusiveMaximum": 360,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Northdegrees"
+        },
+        "coordinateFrame": {
+          "const": "footprint-local-xy-mm",
+          "default": "footprint-local-xy-mm",
+          "title": "Coordinateframe",
+          "type": "string"
+        }
+      },
+      "required": [
+        "footprintBasis"
+      ],
+      "title": "SpatialContext",
+      "type": "object"
+    },
+    "Wall": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "start": {
+          "items": {
+            "maximum": 20000,
+            "minimum": 0,
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "Start",
+          "type": "array"
+        },
+        "end": {
+          "items": {
+            "maximum": 20000,
+            "minimum": 0,
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "End",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "exterior",
+            "interior"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "roomKeys": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_-]{0,47}$",
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Roomkeys",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "start",
+        "end",
+        "kind",
+        "roomKeys"
+      ],
+      "title": "Wall",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 4,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "engineVersion": {
+      "const": "variable-v3",
+      "title": "Engineversion",
+      "type": "string"
+    },
+    "planId": {
+      "format": "uuid",
+      "title": "Planid",
+      "type": "string"
+    },
+    "version": {
+      "maximum": 20,
+      "minimum": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "parentVersion": {
+      "anyOf": [
+        {
+          "maximum": 19,
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Parentversion"
+    },
+    "units": {
+      "const": "mm",
+      "title": "Units",
+      "type": "string"
+    },
+    "frame": {
+      "const": "internal-xy",
+      "title": "Frame",
+      "type": "string"
+    },
+    "site": {
+      "$ref": "#/$defs/SiteV3"
+    },
+    "level": {
+      "$ref": "#/$defs/Level"
+    },
+    "wallHeightMm": {
+      "maximum": 4000,
+      "minimum": 2500,
+      "title": "Wallheightmm",
+      "type": "integer"
+    },
+    "wallThicknessMm": {
+      "maximum": 300,
+      "minimum": 100,
+      "title": "Wallthicknessmm",
+      "type": "number"
+    },
+    "rooms": {
+      "items": {
+        "$ref": "#/$defs/Room"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Rooms",
+      "type": "array"
+    },
+    "walls": {
+      "items": {
+        "$ref": "#/$defs/Wall"
+      },
+      "maxItems": 100,
+      "title": "Walls",
+      "type": "array"
+    },
+    "openings": {
+      "items": {
+        "$ref": "#/$defs/Opening"
+      },
+      "maxItems": 100,
+      "title": "Openings",
+      "type": "array"
+    },
+    "assumptions": {
+      "items": {
+        "maxLength": 240,
+        "type": "string"
+      },
+      "maxItems": 30,
+      "title": "Assumptions",
+      "type": "array"
+    },
+    "unresolvedConstraints": {
+      "items": {
+        "maxLength": 240,
+        "type": "string"
+      },
+      "maxItems": 30,
+      "title": "Unresolvedconstraints",
+      "type": "array"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "display": {
+      "additionalProperties": {
+        "maxLength": 240,
+        "type": "string"
+      },
+      "maxProperties": 12,
+      "title": "Display",
+      "type": "object"
+    },
+    "spatialContext": {
+      "$ref": "#/$defs/SpatialContext"
+    },
+    "requirements": {
+      "items": {
+        "$ref": "#/$defs/RequirementV3"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Requirements",
+      "type": "array"
+    },
+    "clearDimensions": {
+      "items": {
+        "$ref": "#/$defs/ClearDimension"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Cleardimensions",
+      "type": "array"
+    },
+    "dimensionIntents": {
+      "items": {
+        "enum": [
+          "overall",
+          "room-clear"
+        ],
+        "type": "string"
+      },
+      "maxItems": 2,
+      "title": "Dimensionintents",
+      "type": "array"
+    },
+    "furnitureIntents": {
+      "items": {
+        "$ref": "#/$defs/FurnitureIntent"
+      },
+      "maxItems": 40,
+      "title": "Furnitureintents",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "engineVersion",
+    "planId",
+    "version",
+    "parentVersion",
+    "units",
+    "frame",
+    "site",
+    "level",
+    "wallHeightMm",
+    "wallThicknessMm",
+    "rooms",
+    "walls",
+    "openings",
+    "provenance",
+    "spatialContext",
+    "requirements",
+    "clearDimensions",
+    "dimensionIntents"
+  ],
+  "title": "PlanGraphV4",
+  "type": "object",
+  "$id": "https://datumm.local/contracts/plan-graph.v4.schema.json"
+}

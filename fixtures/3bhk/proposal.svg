@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1000" viewBox="0 0 960 1000"><rect width="960" height="1000" fill="#f8fafc"/>
+<text x="50" y="35" font-family="Arial" font-size="25" font-weight="bold" fill="#0f172a">DATUMM · 3BHK demonstration</text>
+<text x="50" y="59" font-family="Arial" font-size="14" fill="#475569">14 × 12 m demo boundary · dimensions in metres · north shown upward</text>
+<rect x="50" y="70" width="840" height="720" fill="none" stroke="#94a3b8" stroke-dasharray="6 6"/>
+<rect x="62" y="460" width="390" height="270" fill="#fef3c7"/>
+<text x="257" y="580" text-anchor="middle" font-family="Arial" font-size="13" fill="#0f172a">Living and dining</text>
+<text x="257" y="617" text-anchor="middle" font-family="Arial" font-size="11" fill="#475569">27.60 m²</text>
+<text x="257" y="633" text-anchor="middle" font-family="Arial" font-size="10" fill="#64748b">6.50 × 4.50 CL</text>
+<rect x="452" y="460" width="210" height="270" fill="#fef3c7"/>
+<text x="557" y="580" text-anchor="middle" font-family="Arial" font-size="13" fill="#0f172a">Kitchen</text>
+<text x="557" y="617" text-anchor="middle" font-family="Arial" font-size="11" fill="#475569">14.55 m²</text>
+<text x="557" y="633" text-anchor="middle" font-family="Arial" font-size="10" fill="#64748b">3.50 × 4.50 CL</text>
+<rect x="662" y="460" width="90" height="270" fill="#f1f5f9"/>
+<text x="707" y="580" text-anchor="middle" font-family="Arial" font-size="11" fill="#0f172a">Bathroom</text>
+<text x="707" y="595" text-anchor="middle" font-family="Arial" font-size="11" fill="#0f172a">passage</text>
+<text x="707" y="617" text-anchor="middle" font-family="Arial" font-size="11" fill="#475569">5.86 m²</text>
+<rect x="752" y="595" width="126" height="135" fill="#cffafe"/>
+<text x="815" y="647.5" text-anchor="middle" font-family="Arial" font-size="13" fill="#0f172a">Bathroom 1</text>
+<text x="815" y="684.5" text-anchor="middle" font-family="Arial" font-size="11" fill="#475569">4.09 m²</text>
+<text x="815" y="700.5" text-anchor="middle" font-family="Arial" font-size="10" fill="#64748b">2.10 × 2.25 CL</text>
+<rect x="752" y="460" width="126" height="135" fill="#cffafe"/>
+<text x="815" y="512.5" text-anchor="middle" font-family="Arial" font-size="13" fill="#0f172a">Bathroom 2</text>
+<text x="815" y="549.5" text-anchor="middle" font-family="Arial" font-size="11" fill="#475569">4.09 m²</text>
+<text x="815" y="565.5" text-anchor="middle" font-family="Arial" font-size="10" fill="#64748b">2.10 × 2.25 CL</text>
+<rect x="62" y="370" width="816" height="90" fill="#f1f5f9"/>
+<text x="470" y="400" text-anchor="middle" font-family="Arial" font-size="13" fill="#0f172a">Main circulation</text>
+<text x="470" y="437" text-anchor="middle" font-family="Arial" font-size="11" fill="#475569">18.12 m²</text>
+<text x="470" y="453" text-anchor="middle" font-family="Arial" font-size="10" fill="#64748b">13.60 × 1.50 CL</text>
+<rect x="62" y="130" width="271.98" height="240" fill="#dbeafe"/>
+<text x="197.98999999999998" y="235" text-anchor="middle" font-family="Arial" font-size="13" fill="#0f172a">Bedroom 1</text>
+<text x="197.98999999999998" y="272" text-anchor="middle" font-family="Arial" font-size="11" fill="#475569">16.85 m²</text>
+<text x="197.98999999999998" y="288" text-anchor="middle" font-family="Arial" font-size="10" fill="#64748b">4.53 × 4.00 CL</text>
+<rect x="333.97999999999996" y="130" width="271.98" height="240" fill="#dbeafe"/>
+<text x="469.96999999999997" y="235" text-anchor="middle" font-family="Arial" font-size="13" fill="#0f172a">Bedroom 2</text>
+<text x="469.96999999999997" y="272" text-anchor="middle" font-family="Arial" font-size="11" fill="#475569">16.85 m²</text>
+<text x="469.96999999999997" y="288" text-anchor="middle" font-family="Arial" font-size="10" fill="#64748b">4.53 × 4.00 CL</text>
+<rect x="605.9599999999999" y="130" width="272.03999999999996" height="240" fill="#dbeafe"/>
+<text x="741.98" y="235" text-anchor="middle" font-family="Arial" font-size="13" fill="#0f172a">Bedroom 3</text>
+<text x="741.98" y="272" text-anchor="middle" font-family="Arial" font-size="11" fill="#475569">16.86 m²</text>
+<text x="741.98" y="288" text-anchor="middle" font-family="Arial" font-size="10" fill="#64748b">4.53 × 4.00 CL</text>
+<line x1="62" y1="730" x2="452" y2="730" stroke="#334155" stroke-width="9.144"/>
+<line x1="452" y1="730" x2="662" y2="730" stroke="#334155" stroke-width="9.144"/>
+<line x1="662" y1="730" x2="752" y2="730" stroke="#334155" stroke-width="9.144"/>
+<line x1="752" y1="730" x2="878" y2="730" stroke="#334155" stroke-width="9.144"/>
+<line x1="62" y1="130" x2="333.97999999999996" y2="130" stroke="#334155" stroke-width="9.144"/>
+<line x1="333.97999999999996" y1="130" x2="605.9599999999999" y2="130" stroke="#334155" stroke-width="9.144"/>
+<line x1="605.9599999999999" y1="130" x2="878" y2="130" stroke="#334155" stroke-width="9.144"/>
+<line x1="752" y1="595" x2="878" y2="595" stroke="#334155" stroke-width="9.144"/>
+<line x1="62" y1="460" x2="452" y2="460" stroke="#334155" stroke-width="9.144"/>
+<line x1="452" y1="460" x2="662" y2="460" stroke="#334155" stroke-width="9.144"/>
+<line x1="662" y1="460" x2="752" y2="460" stroke="#334155" stroke-width="9.144"/>
+<line x1="752" y1="460" x2="878" y2="460" stroke="#334155" stroke-width="9.144"/>
+<line x1="62" y1="370" x2="333.97999999999996" y2="370" stroke="#334155" stroke-width="9.144"/>
+<line x1="333.97999999999996" y1="370" x2="605.9599999999999" y2="370" stroke="#334155" stroke-width="9.144"/>
+<line x1="605.9599999999999" y1="370" x2="878" y2="370" stroke="#334155" stroke-width="9.144"/>
+<line x1="662" y1="730" x2="662" y2="460" stroke="#334155" stroke-width="9.144"/>
+<line x1="752" y1="730" x2="752" y2="595" stroke="#334155" stroke-width="9.144"/>
+<line x1="752" y1="595" x2="752" y2="460" stroke="#334155" stroke-width="9.144"/>
+<line x1="878" y1="730" x2="878" y2="595" stroke="#334155" stroke-width="9.144"/>
+<line x1="878" y1="595" x2="878" y2="460" stroke="#334155" stroke-width="9.144"/>
+<line x1="878" y1="460" x2="878" y2="370" stroke="#334155" stroke-width="9.144"/>
+<line x1="878" y1="370" x2="878" y2="130" stroke="#334155" stroke-width="9.144"/>
+<line x1="62" y1="730" x2="62" y2="460" stroke="#334155" stroke-width="9.144"/>
+<line x1="62" y1="460" x2="62" y2="370" stroke="#334155" stroke-width="9.144"/>
+<line x1="62" y1="370" x2="62" y2="130" stroke="#334155" stroke-width="9.144"/>
+<line x1="333.97999999999996" y1="370" x2="333.97999999999996" y2="130" stroke="#334155" stroke-width="9.144"/>
+<line x1="452" y1="730" x2="452" y2="460" stroke="#334155" stroke-width="9.144"/>
+<line x1="605.9599999999999" y1="370" x2="605.9599999999999" y2="130" stroke="#334155" stroke-width="9.144"/>
+<line x1="142.56799999999998" y1="730" x2="197.432" y2="730" stroke="#f8fafc" stroke-width="11"/>
+<line x1="232.568" y1="460" x2="287.432" y2="460" stroke="#f8fafc" stroke-width="11"/>
+<line x1="514.568" y1="460" x2="569.432" y2="460" stroke="#f8fafc" stroke-width="11"/>
+<line x1="679.568" y1="460" x2="734.432" y2="460" stroke="#f8fafc" stroke-width="11"/>
+<line x1="752" y1="689.932" x2="752" y2="635.068" stroke="#f8fafc" stroke-width="11"/>
+<line x1="752" y1="554.932" x2="752" y2="500.06800000000004" stroke="#f8fafc" stroke-width="11"/>
+<line x1="170.528" y1="370" x2="225.392" y2="370" stroke="#f8fafc" stroke-width="11"/>
+<line x1="442.508" y1="370" x2="497.37199999999996" y2="370" stroke="#f8fafc" stroke-width="11"/>
+<line x1="714.5479999999999" y1="370" x2="769.412" y2="370" stroke="#f8fafc" stroke-width="11"/>
+<line x1="62" y1="622.432" x2="62" y2="567.568" stroke="#0891b2" stroke-width="5"/>
+<line x1="517.568" y1="730" x2="572.432" y2="730" stroke="#0891b2" stroke-width="5"/>
+<line x1="170.528" y1="130" x2="225.392" y2="130" stroke="#0891b2" stroke-width="5"/>
+<line x1="442.508" y1="130" x2="497.37199999999996" y2="130" stroke="#0891b2" stroke-width="5"/>
+<line x1="714.5479999999999" y1="130" x2="769.412" y2="130" stroke="#0891b2" stroke-width="5"/>
+<line x1="878" y1="680.788" x2="878" y2="644.212" stroke="#0891b2" stroke-width="5"/>
+<line x1="878" y1="545.788" x2="878" y2="509.212" stroke="#0891b2" stroke-width="5"/>
+<g font-family="Arial" font-size="14" fill="#475569"><text x="50" y="833">Wall centreline footprint: 13.60 × 10.00 m · wall thickness: 152.4 mm · height: 3 m</text><text x="50" y="860">White gaps: doors · cyan: windows · nine enclosed spaces including two circulation rooms</text><text x="50" y="887">Areas predict clear rectangular interiors; live Revit areas will be checked before commitment.</text><text x="50" y="914">Demo assumptions: target areas allow ±30%; room read-back tolerance ±0.12 m².</text><text x="50" y="941">Concept only: no furniture, door-swing control, structure, services or compliance assessment.</text></g></svg>

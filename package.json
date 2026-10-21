@@ -1,0 +1,20 @@
+{
+  "name": "revit-datumm-plugin",
+  "version": "0.2.0-alpha.8",
+  "private": true,
+  "description": "DATUMM Revit 2026 add-in, local MCP connector and Windows installer",
+  "workspaces": [
+    "revit-mcp",
+    "apps/connector"
+  ],
+  "scripts": {
+    "build:mcp": "npm run build --workspace @datumm/revit-mcp",
+    "build:plugin": "dotnet build revit-plugin/src/Datumm.Revit/Datumm.Revit.csproj -c Release -p:RestoreLockedMode=true",
+    "test:mcp": "npm test --workspace @datumm/revit-mcp",
+    "smoke:live": "node revit-mcp/dist/smoke.js",
+    "test:installer": "node --test packaging/tests/lifecycle.test.mjs",
+    "test:connector": "node --test apps/connector/tests/*.test.mjs",
+    "test:contracts": "dotnet run --project revit-plugin/tests/Datumm.Bridge.TestHost -c Release -- --contracts artifacts/contract-checks",
+    "test:compatibility": "dotnet run --project revit-plugin/tests/Datumm.Bridge.TestHost -c Release -- --compatibility revit-plugin/src/Datumm.Revit/bin/Release/net8.0-windows/Datumm.Revit.dll packaging/release.json"
+  }
+}

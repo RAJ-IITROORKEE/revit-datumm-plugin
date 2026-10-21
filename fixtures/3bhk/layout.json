@@ -1,0 +1,39 @@
+{
+  "id": "datumm-3bhk-orthogonal-v1",
+  "units": "mm",
+  "site": [0, 0, 14000, 12000],
+  "footprint": [200, 1000, 13800, 11000],
+  "wallThicknessMm": 152.4,
+  "wallHeightMm": 3000,
+  "areaToleranceM2": 0.12,
+  "targetAreaToleranceFraction": 0.3,
+  "rooms": [
+    { "key": "living", "name": "Living and dining", "rect": [200,1000,6700,5500], "targetAreaM2": 30 },
+    { "key": "kitchen", "name": "Kitchen", "rect": [6700,1000,10200,5500], "targetAreaM2": 12 },
+    { "key": "passage", "name": "Bathroom passage", "rect": [10200,1000,11700,5500] },
+    { "key": "bath1", "name": "Bathroom 1", "rect": [11700,1000,13800,3250], "targetAreaM2": 5 },
+    { "key": "bath2", "name": "Bathroom 2", "rect": [11700,3250,13800,5500], "targetAreaM2": 5 },
+    { "key": "hall", "name": "Main circulation", "rect": [200,5500,13800,7000] },
+    { "key": "bed1", "name": "Bedroom 1", "rect": [200,7000,4733,11000], "targetAreaM2": 16 },
+    { "key": "bed2", "name": "Bedroom 2", "rect": [4733,7000,9266,11000], "targetAreaM2": 14 },
+    { "key": "bed3", "name": "Bedroom 3", "rect": [9266,7000,13800,11000], "targetAreaM2": 14 }
+  ],
+  "openings": [
+    { "key": "entry", "kind": "door", "rooms": ["outside","living"], "point": [2000,1000], "type": "door", "widthMm": 914.4, "heightMm": 2032, "sillMm": 0 },
+    { "key": "living-hall", "kind": "door", "rooms": ["living","hall"], "point": [3500,5500], "type": "door", "widthMm": 914.4, "heightMm": 2032, "sillMm": 0 },
+    { "key": "kitchen-hall", "kind": "door", "rooms": ["kitchen","hall"], "point": [8200,5500], "type": "door", "widthMm": 914.4, "heightMm": 2032, "sillMm": 0 },
+    { "key": "passage-hall", "kind": "door", "rooms": ["passage","hall"], "point": [10950,5500], "type": "door", "widthMm": 914.4, "heightMm": 2032, "sillMm": 0 },
+    { "key": "bath1-door", "kind": "door", "rooms": ["bath1","passage"], "point": [11700,2125], "type": "door", "widthMm": 914.4, "heightMm": 2032, "sillMm": 0 },
+    { "key": "bath2-door", "kind": "door", "rooms": ["bath2","passage"], "point": [11700,4375], "type": "door", "widthMm": 914.4, "heightMm": 2032, "sillMm": 0 },
+    { "key": "bed1-door", "kind": "door", "rooms": ["bed1","hall"], "point": [2466,7000], "type": "door", "widthMm": 914.4, "heightMm": 2032, "sillMm": 0 },
+    { "key": "bed2-door", "kind": "door", "rooms": ["bed2","hall"], "point": [6999,7000], "type": "door", "widthMm": 914.4, "heightMm": 2032, "sillMm": 0 },
+    { "key": "bed3-door", "kind": "door", "rooms": ["bed3","hall"], "point": [11533,7000], "type": "door", "widthMm": 914.4, "heightMm": 2032, "sillMm": 0 },
+    { "key": "living-window", "kind": "window", "rooms": ["living","outside"], "point": [200,3250], "type": "window", "widthMm": 914.4, "heightMm": 1219.2, "sillMm": 900 },
+    { "key": "kitchen-window", "kind": "window", "rooms": ["kitchen","outside"], "point": [8250,1000], "type": "window", "widthMm": 914.4, "heightMm": 1219.2, "sillMm": 900 },
+    { "key": "bed1-window", "kind": "window", "rooms": ["bed1","outside"], "point": [2466,11000], "type": "window", "widthMm": 914.4, "heightMm": 1219.2, "sillMm": 900 },
+    { "key": "bed2-window", "kind": "window", "rooms": ["bed2","outside"], "point": [6999,11000], "type": "window", "widthMm": 914.4, "heightMm": 1219.2, "sillMm": 900 },
+    { "key": "bed3-window", "kind": "window", "rooms": ["bed3","outside"], "point": [11533,11000], "type": "window", "widthMm": 914.4, "heightMm": 1219.2, "sillMm": 900 },
+    { "key": "bath1-window", "kind": "window", "rooms": ["bath1","outside"], "point": [13800,2125], "type": "smallWindow", "widthMm": 609.6, "heightMm": 914.4, "sillMm": 1500 },
+    { "key": "bath2-window", "kind": "window", "rooms": ["bath2","outside"], "point": [13800,4375], "type": "smallWindow", "widthMm": 609.6, "heightMm": 914.4, "sillMm": 1500 }
+  ]
+}

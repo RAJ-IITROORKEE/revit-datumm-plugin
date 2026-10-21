@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseWPF>true</UseWPF>
+    <Version>0.2.0-alpha.8</Version>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <RevitApiPackageVersion>2026.0.4</RevitApiPackageVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="../../../packaging/release.json" LogicalName="Datumm.Revit.release.json" />
+    <Resource Include="../../../datumm-app/fav.png" Link="Assets/datumm-mark.png" />
+    <ProjectReference Include="../Datumm.Bridge/Datumm.Bridge.csproj" />
+    <PackageReference Include="Nice3point.Revit.Api.RevitAPI" Version="$(RevitApiPackageVersion)" PrivateAssets="all" IncludeAssets="compile" Condition="'$(RevitInstallDir)' == ''" />
+    <PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitApiPackageVersion)" PrivateAssets="all" IncludeAssets="compile" Condition="'$(RevitInstallDir)' == ''" />
+    <Reference Include="RevitAPI" Condition="'$(RevitInstallDir)' != ''">
+      <HintPath>$(RevitInstallDir)/RevitAPI.dll</HintPath>
+      <Private>false</Private>
+      <ExternallyResolved>true</ExternallyResolved>
+    </Reference>
+    <Reference Include="RevitAPIUI" Condition="'$(RevitInstallDir)' != ''">
+      <HintPath>$(RevitInstallDir)/RevitAPIUI.dll</HintPath>
+      <Private>false</Private>
+      <ExternallyResolved>true</ExternallyResolved>
+    </Reference>
+  </ItemGroup>
+  <Target Name="RequireInstalledApi" BeforeTargets="ResolveReferences" Condition="'$(RevitInstallDir)' != ''">
+    <Error Condition="!Exists('$(RevitInstallDir)/RevitAPI.dll') Or !Exists('$(RevitInstallDir)/RevitAPIUI.dll')" Text="RevitInstallDir must contain both Autodesk API reference assemblies. Autodesk assemblies are not bundled." />
+  </Target>
+</Project>

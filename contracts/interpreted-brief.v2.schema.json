@@ -1,0 +1,673 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datumm.dev/contracts/interpreted-brief.v2.schema.json",
+  "$defs": {
+    "Dimension": {
+      "additionalProperties": false,
+      "properties": {
+        "sourceId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Sourceid",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 1,
+          "title": "End",
+          "type": "integer"
+        },
+        "sourceText": {
+          "maxLength": 12000,
+          "title": "Sourcetext",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "parcel",
+            "footprint",
+            "unknown"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "provenance": {
+          "enum": [
+            "explicit",
+            "answered",
+            "assumed"
+          ],
+          "title": "Provenance",
+          "type": "string"
+        },
+        "widthRaw": {
+          "pattern": "^\\d+(?:\\.\\d+)?$",
+          "title": "Widthraw",
+          "type": "string"
+        },
+        "depthRaw": {
+          "pattern": "^\\d+(?:\\.\\d+)?$",
+          "title": "Depthraw",
+          "type": "string"
+        },
+        "widthUnit": {
+          "anyOf": [
+            {
+              "maxLength": 40,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Widthunit"
+        },
+        "depthUnit": {
+          "anyOf": [
+            {
+              "maxLength": 40,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Depthunit"
+        },
+        "widthMm": {
+          "anyOf": [
+            {
+              "pattern": "^\\d+(?:\\.\\d+)?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Widthmm"
+        },
+        "depthMm": {
+          "anyOf": [
+            {
+              "pattern": "^\\d+(?:\\.\\d+)?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Depthmm"
+        },
+        "unitSourceId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unitsourceid"
+        },
+        "roleSourceId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rolesourceid"
+        }
+      },
+      "required": [
+        "sourceId",
+        "start",
+        "end",
+        "sourceText",
+        "role",
+        "provenance",
+        "widthRaw",
+        "depthRaw",
+        "widthUnit",
+        "depthUnit",
+        "widthMm",
+        "depthMm"
+      ],
+      "title": "Dimension",
+      "type": "object"
+    },
+    "EvidenceFact": {
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "enum": [
+            "bedrooms",
+            "guestRooms",
+            "bathrooms",
+            "entry",
+            "dimensionRole",
+            "jurisdiction",
+            "output",
+            "label",
+            "room"
+          ],
+          "title": "Field",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "maxLength": 12000,
+              "type": "string"
+            },
+            {
+              "maximum": 20,
+              "minimum": 0,
+              "type": "integer"
+            }
+          ],
+          "title": "Value"
+        },
+        "sourceId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Sourceid",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 1,
+          "title": "End",
+          "type": "integer"
+        },
+        "quote": {
+          "maxLength": 12000,
+          "title": "Quote",
+          "type": "string"
+        },
+        "provenance": {
+          "enum": [
+            "explicit",
+            "answered",
+            "assumed"
+          ],
+          "title": "Provenance",
+          "type": "string"
+        }
+      },
+      "required": [
+        "field",
+        "value",
+        "sourceId",
+        "start",
+        "end",
+        "quote",
+        "provenance"
+      ],
+      "title": "EvidenceFact",
+      "type": "object"
+    },
+    "Policy": {
+      "additionalProperties": false,
+      "properties": {
+        "policyVersion": {
+          "const": 1,
+          "title": "Policyversion",
+          "type": "integer"
+        },
+        "promptVersion": {
+          "const": 1,
+          "title": "Promptversion",
+          "type": "integer"
+        },
+        "role": {
+          "const": "brief_interpreter",
+          "title": "Role",
+          "type": "string"
+        },
+        "modelId": {
+          "maxLength": 160,
+          "title": "Modelid",
+          "type": "string"
+        },
+        "selection": {
+          "enum": [
+            "configured",
+            "selected_planner_separate_call"
+          ],
+          "title": "Selection",
+          "type": "string"
+        },
+        "automaticFallback": {
+          "const": false,
+          "title": "Automaticfallback",
+          "type": "boolean"
+        },
+        "literalFallback": {
+          "const": true,
+          "title": "Literalfallback",
+          "type": "boolean"
+        },
+        "maxOutputRepairs": {
+          "const": 1,
+          "title": "Maxoutputrepairs",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "policyVersion",
+        "promptVersion",
+        "role",
+        "modelId",
+        "selection",
+        "automaticFallback",
+        "literalFallback",
+        "maxOutputRepairs"
+      ],
+      "title": "Policy",
+      "type": "object"
+    },
+    "Program": {
+      "additionalProperties": false,
+      "properties": {
+        "livingHall": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Livinghall"
+        },
+        "kitchen": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Kitchen"
+        },
+        "basis": {
+          "enum": [
+            "explicit_bhk",
+            "not_specified"
+          ],
+          "title": "Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "livingHall",
+        "kitchen",
+        "basis"
+      ],
+      "title": "Program",
+      "type": "object"
+    },
+    "Setbacks": {
+      "additionalProperties": false,
+      "properties": {
+        "sourceText": {
+          "maxLength": 12000,
+          "title": "Sourcetext",
+          "type": "string"
+        },
+        "sourceId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Sourceid",
+          "type": "string"
+        },
+        "provenance": {
+          "enum": [
+            "explicit",
+            "answered",
+            "assumed"
+          ],
+          "title": "Provenance",
+          "type": "string"
+        },
+        "valueMm": {
+          "anyOf": [
+            {
+              "pattern": "^\\d+(?:\\.\\d+)?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valuemm"
+        },
+        "uniformDistanceInferred": {
+          "anyOf": [
+            {
+              "const": false,
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Uniformdistanceinferred"
+        }
+      },
+      "required": [
+        "sourceText",
+        "sourceId",
+        "provenance"
+      ],
+      "title": "Setbacks",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "maxLength": 12000,
+          "title": "Text",
+          "type": "string"
+        },
+        "provenance": {
+          "enum": [
+            "explicit",
+            "answered"
+          ],
+          "title": "Provenance",
+          "type": "string"
+        },
+        "field": {
+          "anyOf": [
+            {
+              "maxLength": 40,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Field"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "provenance"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "Value": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "anyOf": [
+            {
+              "maxLength": 12000,
+              "type": "string"
+            },
+            {
+              "maximum": 20,
+              "minimum": 0,
+              "type": "integer"
+            }
+          ],
+          "title": "Value"
+        },
+        "provenance": {
+          "enum": [
+            "explicit",
+            "answered",
+            "assumed"
+          ],
+          "title": "Provenance",
+          "type": "string"
+        },
+        "sourceId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sourceid"
+        }
+      },
+      "required": [
+        "value",
+        "provenance",
+        "sourceId"
+      ],
+      "title": "Value",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 2,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "program": {
+      "$ref": "#/$defs/Program"
+    },
+    "promptVersion": {
+      "const": 1,
+      "title": "Promptversion",
+      "type": "integer"
+    },
+    "inputDigest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Inputdigest",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "maxItems": 48,
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    },
+    "facts": {
+      "items": {
+        "$ref": "#/$defs/EvidenceFact"
+      },
+      "maxItems": 512,
+      "title": "Facts",
+      "type": "array"
+    },
+    "dimensions": {
+      "items": {
+        "$ref": "#/$defs/Dimension"
+      },
+      "maxItems": 48,
+      "title": "Dimensions",
+      "type": "array"
+    },
+    "values": {
+      "additionalProperties": {
+        "$ref": "#/$defs/Value"
+      },
+      "propertyNames": {
+        "maxLength": 40
+      },
+      "title": "Values",
+      "type": "object"
+    },
+    "guestRoomRelation": {
+      "anyOf": [
+        {
+          "enum": [
+            "additional",
+            "included"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Guestroomrelation"
+    },
+    "setbacks": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Setbacks"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "unresolved": {
+      "items": {
+        "enum": [
+          "dimensions",
+          "units",
+          "dimension_role",
+          "footprint",
+          "entry",
+          "guest_relation",
+          "bathrooms",
+          "jurisdiction",
+          "setbacks"
+        ],
+        "type": "string"
+      },
+      "maxItems": 9,
+      "title": "Unresolved",
+      "type": "array"
+    },
+    "assumptions": {
+      "items": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "maxItems": 4,
+      "title": "Assumptions",
+      "type": "array"
+    },
+    "deferred": {
+      "items": {
+        "enum": [
+          "jurisdiction",
+          "setbacks"
+        ],
+        "type": "string"
+      },
+      "maxItems": 2,
+      "title": "Deferred",
+      "type": "array"
+    },
+    "provisional": {
+      "title": "Provisional",
+      "type": "boolean"
+    },
+    "buildIntent": {
+      "title": "Buildintent",
+      "type": "boolean"
+    },
+    "nativeAuthority": {
+      "const": "none",
+      "title": "Nativeauthority",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "ready",
+        "fallback"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "policy": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Policy"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "attempts": {
+      "maximum": 2,
+      "minimum": 0,
+      "title": "Attempts",
+      "type": "integer"
+    },
+    "fallbackReason": {
+      "anyOf": [
+        {
+          "maxLength": 80,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fallbackreason"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "program",
+    "promptVersion",
+    "inputDigest",
+    "sources",
+    "facts",
+    "dimensions",
+    "values",
+    "guestRoomRelation",
+    "setbacks",
+    "unresolved",
+    "assumptions",
+    "deferred",
+    "provisional",
+    "buildIntent",
+    "nativeAuthority",
+    "status",
+    "policy",
+    "attempts"
+  ],
+  "title": "Brief",
+  "type": "object"
+}

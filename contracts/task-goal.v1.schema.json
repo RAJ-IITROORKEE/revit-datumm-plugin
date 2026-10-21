@@ -1,0 +1,167 @@
+{
+  "$defs": {
+    "GoalScope": {
+      "additionalProperties": false,
+      "properties": {
+        "deviceId": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Deviceid"
+        },
+        "sessionId": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sessionid"
+        },
+        "documentId": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Documentid"
+        },
+        "revision": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Revision"
+        }
+      },
+      "title": "GoalScope",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "goalId": {
+      "format": "uuid",
+      "title": "Goalid",
+      "type": "string"
+    },
+    "version": {
+      "maximum": 100,
+      "minimum": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "parentVersion": {
+      "anyOf": [
+        {
+          "maximum": 99,
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Parentversion"
+    },
+    "intent": {
+      "enum": [
+        "ask",
+        "analyze",
+        "design",
+        "revise",
+        "build"
+      ],
+      "title": "Intent",
+      "type": "string"
+    },
+    "request": {
+      "maxLength": 12000,
+      "minLength": 1,
+      "title": "Request",
+      "type": "string"
+    },
+    "successCriteria": {
+      "items": {
+        "maxLength": 240,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 12,
+      "minItems": 1,
+      "title": "Successcriteria",
+      "type": "array"
+    },
+    "hardConstraints": {
+      "items": {
+        "maxLength": 240,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Hardconstraints",
+      "type": "array"
+    },
+    "assumptions": {
+      "items": {
+        "maxLength": 240,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Assumptions",
+      "type": "array"
+    },
+    "missingInputs": {
+      "items": {
+        "maxLength": 240,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 12,
+      "title": "Missinginputs",
+      "type": "array"
+    },
+    "scope": {
+      "$ref": "#/$defs/GoalScope"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "goalId",
+    "version",
+    "parentVersion",
+    "intent",
+    "request",
+    "successCriteria"
+  ],
+  "title": "TaskGoalV1",
+  "type": "object"
+}
