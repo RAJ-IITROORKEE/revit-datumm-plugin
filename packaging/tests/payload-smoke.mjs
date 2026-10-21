@@ -1,11 +1,13 @@
-import {Client} from '@modelcontextprotocol/sdk/client/index.js';
-import {StdioClientTransport} from '@modelcontextprotocol/sdk/client/stdio.js';
+import {createRequire} from 'node:module';
 import {mkdir,mkdtemp,readFile} from 'node:fs/promises';
 import {resolve,join} from 'node:path';
 import assert from 'node:assert/strict';
 import {pathToFileURL} from 'node:url';
 import {verifyRelease} from '../lifecycle.mjs';
 const payload=resolve(process.argv[2]??'missing-payload');
+const require=createRequire(join(payload,'revit-mcp','dist','index.js'));
+const {Client}=await import(pathToFileURL(require.resolve('@modelcontextprotocol/sdk/client/index.js')));
+const {StdioClientTransport}=await import(pathToFileURL(require.resolve('@modelcontextprotocol/sdk/client/stdio.js')));
 const release=await verifyRelease(payload);
 const {generateVariableCandidates}=await import(pathToFileURL(join(payload,'revit-mcp','dist','variable-candidates.js')).href);
 const {bindVariableGraph}=await import(pathToFileURL(join(payload,'revit-mcp','dist','variable-bindings.js')).href);
