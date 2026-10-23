@@ -78,10 +78,22 @@ public sealed class Application : IExternalApplication
             try { bridge.Start(_revitVersion); _bridge = bridge; }
             catch { bridge.Dispose(); _dispatcher.Disable(); throw; }
         }
-        if (_button != null) _button.ItemText = Enabled ? "Disable\nDATUMM" : "Enable\nDATUMM";
+        UpdateRibbonStatus();
     }
 
-    private void OnIdling(object? sender, IdlingEventArgs args) => _dispatcher?.Signal(fromIdling: true);
+    private void UpdateRibbonStatus()
+    {
+        if (_button == null) return;
+        var status = ConnectionStatusPresentation.Create(Enabled, ConnectionWindow.ConnectorRunning, ConnectionWindow.ConnectionStatus);
+        if (_button.ItemText != status.RibbonText) _button.ItemText = status.RibbonText;
+        if (_button.ToolTip != status.RibbonToolTip) _button.ToolTip = status.RibbonToolTip;
+    }
+
+    private void OnIdling(object? sender, IdlingEventArgs args)
+    {
+        _dispatcher?.Signal(fromIdling: true);
+        UpdateRibbonStatus();
+    }
     private void OnDocumentClosing(object? sender, DocumentClosingEventArgs args) => _dispatcher?.ForgetDocument(args.Document);
     private void OnDocumentChanged(object? sender, DocumentChangedEventArgs args) => _dispatcher?.Changed(args.GetDocument());
 

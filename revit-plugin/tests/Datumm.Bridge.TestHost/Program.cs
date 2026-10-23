@@ -8,6 +8,13 @@ if (args.Length >= 1 && args[0] == "--compatibility")
     return;
 }
 
+if (args.Length == 1 && args[0] == "--connection-status")
+{
+    ConnectionStatusChecks.Run();
+    Console.WriteLine("connection-status:passed");
+    return;
+}
+
 if (args.Length == 2 && args[0] == "--contracts")
 {
     ContractChecks.Run(args[1]);

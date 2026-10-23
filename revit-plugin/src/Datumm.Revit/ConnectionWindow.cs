@@ -30,7 +30,9 @@ public sealed class ConnectionSettings : IExternalCommand
 internal sealed class ConnectionWindow : Window
 {
     private static Process? _connector;
-    private static string _connectionStatus = "Disconnected";
+    private static volatile string _connectionStatus = "Disconnected";
+    internal static bool ConnectorRunning => _connector is { HasExited: false };
+    internal static string ConnectionStatus => _connectionStatus;
     private readonly TextBlock _status = new();
     private readonly TextBox _url = new();
     private readonly TextBlock _cloudBadge = new();
@@ -101,14 +103,12 @@ internal sealed class ConnectionWindow : Window
     private void Refresh()
     {
         var enabled = Application.Current?.Enabled == true;
-        var running = _connector is { HasExited: false };
-        var connected = running && _connectionStatus == "connected";
-        var revoked = _connectionStatus == "authorization revoked";
-        _cloudBadge.Text = connected ? "●  Connected to DATUMM" : revoked ? "●  Reauthorization needed" : running ? "●  Connecting to your workspace…" : "○  Not connected";
-        _cloudBadge.Foreground = Brush(connected ? "#B3E1BE" : revoked ? "#F1BE91" : "#CCE3ED");
-        _status.Text = $"Revit bridge {(enabled ? "ready" : "disabled")} · {(connected ? "Authorized device" : revoked ? "Device access was revoked. Reauthorize this computer." : "Browser sign-in connects this computer")}";
-        if (_connectButton != null) _connectButton.Content = running ? "Disconnect" : revoked ? "Reauthorize this computer" : "Connect to DATUMM";
-        if (_bridgeButton != null) _bridgeButton.Content = enabled ? "Disable local bridge" : "Enable local bridge";
+        var status = ConnectionStatusPresentation.Create(enabled, ConnectorRunning, ConnectionStatus);
+        _cloudBadge.Text = status.CloudBadgeText;
+        _cloudBadge.Foreground = Brush(status.CloudBadgeColor);
+        _status.Text = status.StatusText;
+        if (_connectButton != null) _connectButton.Content = status.ConnectButtonText;
+        if (_bridgeButton != null) _bridgeButton.Content = status.BridgeButtonText;
     }
     private void Connect(bool authorize)
     {

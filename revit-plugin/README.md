@@ -2,7 +2,7 @@
 
 Component 0.2.0-alpha.8 targets the Revit 2026 update family on Windows x64. It compiles against GA API file version 26.0.4.409 / assembly version 26.0.4.0 and .NET 8. The embedded release policy allows the GA build and later updates of the same annual version, including 2026.5. See [compatibility limits and evidence](../docs/compatibility.md).
 
-`src/Datumm.Revit` owns Revit startup, ribbon connection/approval UI, the ExternalEvent dispatcher, native inspection and approved transactional changes. `src/Datumm.Bridge` owns transport, sessions, DTOs, journaling and compatibility without an Autodesk dependency. `tests/Datumm.Bridge.TestHost` uses the real transport with simulated API callbacks; it is not Revit.
+`src/Datumm.Revit` owns Revit startup, ribbon connection/approval UI, the ExternalEvent dispatcher, native inspection and approved transactional changes. The ribbon reuses the embedded DATUMM mark and shows connected, disconnected, connecting, revoked, unavailable or disabled state on its existing button; the tooltip keeps the bridge toggle action, local and hosted states, and approval warning. `src/Datumm.Bridge` owns transport, sessions, DTOs, journaling and compatibility without an Autodesk dependency. `tests/Datumm.Bridge.TestHost` uses the real transport with simulated API callbacks; it is not Revit.
 
 All Revit API access runs through ExternalEvent. Writes require preview and exact approval, document/revision checks, bounded operations and native read-back. Unknown write outcomes require querying the existing operation ID rather than blindly retrying. There is no save/sync or arbitrary code tool.
 

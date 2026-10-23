@@ -8,5 +8,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/Datumm.Bridge/Datumm.Bridge.csproj" />
+    <Compile Include="../../src/Datumm.Revit/ConnectionStatusPresentation.cs" Link="ConnectionStatusPresentation.cs" />
   </ItemGroup>
 </Project>

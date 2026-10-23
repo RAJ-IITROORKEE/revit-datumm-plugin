@@ -4,7 +4,7 @@ Actual C# Revit add-in, local TypeScript MCP server, optional hosted connector, 
 
 ## Compatibility
 
-Product **0.5.0-alpha.28**, component **0.2.0-alpha.8**, Windows x64. The installer and add-in accept the Revit **2026** family from the original shipping build **26.0.4.409** through API versions below **27.0.0.0**, including **2026.5 / 26.5.0.55**. The add-in compiles against the original 2026 API, targeting .NET 8. It no longer requires exactly Revit 2026.4.
+Product **0.5.0-alpha.29**, component **0.2.0-alpha.8**, Windows x64. The installer and add-in accept the Revit **2026** family from the original shipping build **26.0.4.409** through API versions below **27.0.0.0**, including **2026.5 / 26.5.0.55**. The add-in compiles against the original 2026 API, targeting .NET 8. It no longer requires exactly Revit 2026.4.
 
 The compatibility policy permits later 2026 updates without repinning an exact patch. This is not a guarantee against future Autodesk changes. Annual versions such as Revit 2027 require their own API/runtime build and validation; this installer does not register for them. See [compatibility and validation](docs/compatibility.md).
 
