@@ -97,8 +97,8 @@ internal sealed class ConnectionWindow : Window
     }
     private static string ReadSavedUrl()
     {
-        try { using var json = JsonDocument.Parse(File.ReadAllText(Path.Combine(Folder, "device.json"))); return json.RootElement.GetProperty("url").GetString()!; }
-        catch { return "https://datumm-mvp-orchestrator.agreeablebush-03f2b2f4.eastus2.azurecontainerapps.io"; }
+        try { using var json = JsonDocument.Parse(File.ReadAllText(Path.Combine(Folder, "device.json"))); return BackendDefaults.Resolve(json.RootElement.GetProperty("url").GetString()); }
+        catch { return BackendDefaults.Url; }
     }
     private void Refresh()
     {

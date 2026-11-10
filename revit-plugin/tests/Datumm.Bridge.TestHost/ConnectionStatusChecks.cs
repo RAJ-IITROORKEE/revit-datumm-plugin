@@ -4,6 +4,9 @@ internal static class ConnectionStatusChecks
 {
     internal static void Run()
     {
+        Check(BackendDefaults.Resolve("https://datumm-mvp-orchestrator.agreeablebush-03f2b2f4.eastus2.azurecontainerapps.io") == BackendDefaults.Url && BackendDefaults.Resolve(null) == BackendDefaults.Url, "The legacy Azure URL migrates to the default backend.");
+        Check(BackendDefaults.Resolve("https://self-hosted.example.com") == "https://self-hosted.example.com", "Custom backend URLs are preserved.");
+
         var connected = ConnectionStatusPresentation.Create(true, true, "connected");
         Check(connected.RibbonText == "DATUMM\nConnected", "A live connector handshake is visible on the ribbon.");
         Check(connected.RibbonToolTip.Contains("Click to disable the local Revit bridge"), "The tooltip keeps the current toggle action.");
