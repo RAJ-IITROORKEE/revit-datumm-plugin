@@ -95,15 +95,13 @@ internal sealed class ConnectionWindow : Window
         button.Click += (_, _) => { try { action(); } catch (Exception error) { Application.Log(error); _status.Text = "Connection could not start. Check the URL and connector installation."; } };
         return button;
     }
-    private const string DefaultUrl = "https://d2hwgmaqtyfvmj.cloudfront.net";
-    private static string? SavedUrl()
+    // The server the saved device credential was issued by, or null when there is none.
+    private static string? SavedCredentialUrl()
     {
         try { using var json = JsonDocument.Parse(File.ReadAllText(Path.Combine(Folder, "device.json"))); return json.RootElement.GetProperty("url").GetString(); }
         catch { return null; }
     }
-    // The Azure backend was retired on 2026-11-11; a saved Azure URL can never connect again.
-    private static string ReadSavedUrl() =>
-        SavedUrl() is { } saved && !saved.EndsWith(".azurecontainerapps.io", StringComparison.OrdinalIgnoreCase) ? saved : DefaultUrl;
+    private static string ReadSavedUrl() => BackendDefaults.Resolve(SavedCredentialUrl());
     private void Refresh()
     {
         var enabled = Application.Current?.Enabled == true;
@@ -146,8 +144,8 @@ internal sealed class ConnectionWindow : Window
         var start = new ProcessStartInfo(node) { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true };
         if (mcpEntry != null) start.Environment["DATUMM_MCP_ENTRY"] = mcpEntry;
         start.ArgumentList.Add(entry); start.ArgumentList.Add("--url=" + url.GetLeftPart(UriPartial.Authority));
-        // The connector refuses a credential issued by another server, so a changed URL signs in again.
-        if (authorize || SavedUrl() != url.GetLeftPart(UriPartial.Authority)) start.ArgumentList.Add("--authorize");
+        // The connector refuses a credential issued by another server (e.g. the retired Azure backend), so sign in again.
+        if (authorize || SavedCredentialUrl() != url.GetLeftPart(UriPartial.Authority)) start.ArgumentList.Add("--authorize");
         _connectionStatus = "connecting";
         _connector = new Process { StartInfo = start, EnableRaisingEvents = true };
         _connector.OutputDataReceived += (_, args) => {
